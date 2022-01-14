@@ -1,0 +1,106 @@
+{
+  "formatVersion": 3,
+  "id": "root",
+  "ideas": {
+    "1": {
+      "title": "Ethereum blockchain",
+      "id": 1,
+      "attr": {
+        "position": [
+          -70,
+          -15,
+          1
+        ]
+      },
+      "ideas": {
+        "1": {
+          "title": "Transações",
+          "id": "15.40d9.df49389d6-4e98.45a6e33c3",
+          "ideas": {
+            "1": {
+              "title": "Autorizar ARP para consumo",
+              "id": "17.40d9.df49389d6-4e98.45a6e33c3"
+            },
+            "2": {
+              "title": "Solicitar material",
+              "id": "18.40d9.df49389d6-4e98.45a6e33c3"
+            },
+            "3": {
+              "title": "Encaminhar material solicitado",
+              "id": "21.40d9.df49389d6-4e98.45a6e33c3"
+            },
+            "4": {
+              "title": "Aprovar material encaminhado",
+              "id": "22.40d9.df49389d6-4e98.45a6e33c3"
+            },
+            "5": {
+              "title": "Autorizar pagamento",
+              "id": "23.40d9.df49389d6-4e98.45a6e33c3"
+            }
+          }
+        },
+        "-10": {
+          "title": "Atores",
+          "id": "4.40d9.df49389d6-4e98.45a6e33c3",
+          "ideas": {
+            "1": {
+              "title": "Analista de Ata de Registro de Preços",
+              "id": "6.40d9.df49389d6-4e98.45a6e33c3"
+            },
+            "2": {
+              "title": "Compradores",
+              "id": "9.40d9.df49389d6-4e98.45a6e33c3"
+            },
+            "3": {
+              "title": "Fornecedores",
+              "id": "10.40d9.df49389d6-4e98.45a6e33c3"
+            },
+            "13": {
+              "title": "Auditores",
+              "id": "11.40d9.df49389d6-4e98.45a6e33c3",
+              "attr": {
+                "position": [
+                  77,
+                  78,
+                  1
+                ]
+              }
+            }
+          },
+          "attr": {
+            "position": [
+              180,
+              -112,
+              1
+            ]
+          }
+        },
+        "-20": {
+          "title": "Ativos",
+          "id": "12.40d9.df49389d6-4e98.45a6e33c3",
+          "attr": {
+            "position": [
+              136,
+              126,
+              2
+            ]
+          },
+          "ideas": {
+            "1": {
+              "title": "Ata de Registro de Preços - ARP",
+              "id": "13.40d9.df49389d6-4e98.45a6e33c3"
+            },
+            "2": {
+              "title": "Solicitação de fornecimento",
+              "id": "14.40d9.df49389d6-4e98.45a6e33c3"
+            }
+          }
+        }
+      }
+    }
+  },
+  "attr": {
+    "theme": "default"
+  },
+  "title": ""
+}
