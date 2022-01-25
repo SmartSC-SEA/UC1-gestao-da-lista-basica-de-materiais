@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 2,
+  "components": [
+    {
+      "text": "# ATAS DE REGISTRO DE PREÇOS REFERENTES AO PREGÃO ELETRÔNICO Nº [0040/2021]",
+      "type": "text",
+      "id": "Field_0sxs5qj"
+    },
+    {
+      "text": "## *Apresentar sequencialmente as informações referentes a cada uma das atas (cada fornecedor gera uma ata com numeração sequencial conforme a numeração do Pregão Eletrônico*",
+      "type": "text",
+      "id": "Field_0rs5w4z"
+    },
+    {
+      "text": "# ARP [0040/2021-1]\n### Empresa: [AQUINPEL SUPRIMENTOS P/ ESC., INF. E PAPELARIA EIRELI] CNPJ: [00.147.109/0001-56]\n###Endereço: [supplier_adress]\n###Representante: [supplier_rep] - CPF: [supplier_rep_cpf] - E-mail: [supplier_rep_email]\n\n---\n\n### Lote: [XVIII] - [CLIPS METALICO N. 3/0 - (LIVRE PARTICIPAÇÃO 75%)]\n#### Item: [18] - Descrição: [CLIPS METALICO PARA PAPEIS NUMERO 3/0, CX 50 UND*]\n#### Unidade de Medida: [Caixa] - Quantidade: [48082] - Preço Unitário: [R$ 1,70] - Marca: [Raffa]\n\n### Lote: [XX] - [CLIPS METALICO N. 6/0 - (LIVRE PARTICIPAÇÃO 75%)]\n#### Item: [20] - Descrição: [CLIPS METALICO PARA PAPEIS NUMERO 000000,CX 50 UND*]\n#### Unidade de Medida: [Caixa] - Quantidade: [46141] - Preço Unitário: [R$ 1,99] - Marca: [Raffa]\n\n### Lote: [XXII] - [COLA BRANCA - (LIVRE PARTICIPAÇÃO 75%)]\n#### Item: [22] - Descrição: [COLA PLASTICA BRANCA FRASCO COM 90 GRAMAS]\n#### Unidade de Medida: [Frasco] - Quantidade: [40633] - Preço Unitário: [R$ 1,27] - Marca: [Pira]",
+      "type": "text",
+      "id": "Field_0q15an5"
+    },
+    {
+      "text": "# ARP [prd_number]\n### Empresa: [supplier_name] CNPJ: [supplier_cnpj]\n###Endereço: [supplier_adress]\n###Representante: [supplier_rep] - CPF: [supplier_rep_cpf] - E-mail: [supplier_rep_email]\n\n---\n\n### Lote: [lot_number] - [lot_description]\n#### Item: [item_number] - Descrição: [item_description]\n#### Unidade de Medida: [item_measure_unit] - Quantidade: [item_quant] - Preço Unitário: [item_unit_price] - Marca: [item_brand]",
+      "type": "text",
+      "id": "Field_1wttki6"
+    },
+    {
+      "key": "field_0",
+      "label": "Gestor da Ata (contractor_exp_ord_name)",
+      "type": "textfield",
+      "id": "Field_0dh0gc7",
+      "description": "Nome do Secretário de Estado da Administração responsável pela Gestão da ARP"
+    },
+    {
+      "key": "field_1",
+      "label": "CPF Gestor da Ata (contractor_exp_ord_cpf)",
+      "type": "textfield",
+      "id": "Field_0dhr9wg",
+      "description": "Número do CPF do Secretário de Estado da Administração responsável pela gestão da ARP"
+    },
+    {
+      "key": "field_2",
+      "label": "Processo SGPE",
+      "type": "textfield",
+      "id": "Field_11bg03l",
+      "description": "Número do processo SGPE relativo ao Pregão Eletrônico"
+    },
+    {
+      "action": "submit",
+      "key": "field_3",
+      "label": "Gerar Atas de Registro de Preço",
+      "type": "button",
+      "id": "Field_1ydqh2g"
+    }
+  ],
+  "type": "default",
+  "id": "Form1_conferir-info-ARP"
+}
