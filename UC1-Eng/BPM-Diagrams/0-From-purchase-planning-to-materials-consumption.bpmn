@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0z3z7o7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0-nightly.20210829" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="N0DoPlanejamentoDeCompraAoConsumoDeMaterialDeListaBasicaProcess" name="1. Do planejamento de compra ao consumo de material de lista básica" isExecutable="true">
+    <bpmn:task id="DoPlanejamentoDeCompraAoConsumoDeMaterialDeListaBasicaTask" name="From purchase planning to materials consumption" />
+    <bpmn:task id="N1GerirPlanejamentoDeCompraTask" name="A&#10;Manage planning purchase" />
+    <bpmn:task id="N2GerirLicitacaoDeCompraTask" name="B&#10;Manage bidding process" />
+    <bpmn:task id="N3GerirAtaDeRegistroDePrecosARPTask" name="C&#10;Manage Price Registration Document (PRD)" />
+    <bpmn:task id="N4GerirCompraDeMaterialTask" name="D&#10;Manage material purchase" />
+    <bpmn:task id="N5GerirConsumoDeMaterialTask" name="F&#10;Manage material consumption" />
+    <bpmn:task id="Activity_03d7mho" name="E&#10;Manage contractual events" />
+    <bpmn:group id="Group_1cmbh13" categoryValueRef="CategoryValue_1riva95" />
+  </bpmn:process>
+  <bpmn:category id="Category_0eo5uia">
+    <bpmn:categoryValue id="CategoryValue_1riva95" />
+  </bpmn:category>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="N0DoPlanejamentoDeCompraAoConsumoDeMaterialDeListaBasicaProcess">
+      <bpmndi:BPMNShape id="Activity_12ijel3_di" bpmnElement="DoPlanejamentoDeCompraAoConsumoDeMaterialDeListaBasicaTask" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="160" y="80" width="580" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fq57nz_di" bpmnElement="N1GerirPlanejamentoDeCompraTask" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="160" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03kit3m_di" bpmnElement="N2GerirLicitacaoDeCompraTask" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="280" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1j6zx9x_di" bpmnElement="N3GerirAtaDeRegistroDePrecosARPTask" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="400" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1sh3phi_di" bpmnElement="N4GerirCompraDeMaterialTask" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="520" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_181khku_di" bpmnElement="N5GerirConsumoDeMaterialTask" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="640" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03d7mho_di" bpmnElement="Activity_03d7mho" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="520" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Group_1cmbh13_di" bpmnElement="Group_1cmbh13">
+        <dc:Bounds x="150" y="70" width="600" height="300" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
