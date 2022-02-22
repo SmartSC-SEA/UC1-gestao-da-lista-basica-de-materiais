@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1raac9g" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0-nightly.20210829" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="NDoEditalAdjudicadoProcess" name="Nº do Edital Adjudicado" isExecutable="true">
+    <bpmn:startEvent id="EditalAdjudicadoStartEvent" name="Edital adjudicado">
+      <bpmn:extensionElements>
+        <camunda:formData businessKey="FormField_27tq37m">
+          <camunda:formField id="FormField_27tq37m" label="Edital adjudicado" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_12m1nbd</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_12m1nbd" sourceRef="EditalAdjudicadoStartEvent" targetRef="GerirAtaDeRegistroDePrecosARPSubProcess" />
+    <bpmn:endEvent id="ARPDisponivelParaConsumoEndEvent" name="ARP disponível para consumo">
+      <bpmn:incoming>Flow_0qb3mo5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:subProcess id="GerirAtaDeRegistroDePrecosARPSubProcess" name="Gerir Ata de Registro de Preços (ARP)">
+      <bpmn:incoming>Flow_12m1nbd</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qb3mo5</bpmn:outgoing>
+      <bpmn:endEvent id="ARPGravadaEmBlockchainEndEvent" name="ARP gravada em blockchain">
+        <bpmn:incoming>Flow_12dmheo</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:scriptTask id="GravarARPEmBlockchainTask" name="Gravar ARP em blockchain">
+        <bpmn:incoming>Flow_1prx6m3</bpmn:incoming>
+        <bpmn:outgoing>Flow_1s813e0</bpmn:outgoing>
+      </bpmn:scriptTask>
+      <bpmn:scriptTask id="GravarInformacoesDaARPEmBlockchainTask" name="Gravar informações da ARP em blockchain">
+        <bpmn:incoming>Flow_0nh13b3</bpmn:incoming>
+        <bpmn:outgoing>Flow_12dmheo</bpmn:outgoing>
+      </bpmn:scriptTask>
+      <bpmn:dataObjectReference id="SmartContract2DataObjectReference1" name="Smart&#10;Contract 2" dataObjectRef="DataObject_1erblud" />
+      <bpmn:dataObject id="DataObject_1erblud" />
+      <bpmn:dataObjectReference id="SmartContract1DataObjectReference" name="Smart&#10;Contract 1" dataObjectRef="DataObject_1qeg5tb" />
+      <bpmn:dataObject id="DataObject_1qeg5tb" />
+      <bpmn:dataObjectReference id="SmartContract2DataObjectReference" name="Smart&#10;Contract 2" dataObjectRef="DataObject_1qba5xc" />
+      <bpmn:dataObject id="DataObject_1qba5xc" />
+      <bpmn:serviceTask id="InserirPecasNoSGPETask" name="Inserir peças no SGPE">
+        <bpmn:incoming>Flow_1s813e0</bpmn:incoming>
+        <bpmn:outgoing>Flow_1g4lyi1</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:userTask id="DisponibilizarARPParaConsumoTask" name="Disponibilizar ARP para consumo" camunda:formKey="camunda-forms:deployment:3-form2-disponibilizar-arp-para-consumo.form">
+        <bpmn:incoming>Flow_1g4lyi1</bpmn:incoming>
+        <bpmn:outgoing>Flow_0nh13b3</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:userTask id="ConferirInformacoesDoEditalTask" name="Conferir informações do Edital" camunda:formKey="camunda-forms:deployment:3-form1-conferir-info-arp.form">
+        <bpmn:incoming>Flow_04jnrxr</bpmn:incoming>
+        <bpmn:outgoing>Flow_1prx6m3</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:startEvent id="EditalDisponivelParaAnaliseStartEvent" name="Edital disponível para análise">
+        <bpmn:outgoing>Flow_04jnrxr</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_12dmheo" sourceRef="GravarInformacoesDaARPEmBlockchainTask" targetRef="ARPGravadaEmBlockchainEndEvent" />
+      <bpmn:sequenceFlow id="Flow_04jnrxr" sourceRef="EditalDisponivelParaAnaliseStartEvent" targetRef="ConferirInformacoesDoEditalTask" />
+      <bpmn:sequenceFlow id="Flow_1g4lyi1" sourceRef="InserirPecasNoSGPETask" targetRef="DisponibilizarARPParaConsumoTask" />
+      <bpmn:sequenceFlow id="Flow_1prx6m3" sourceRef="ConferirInformacoesDoEditalTask" targetRef="GravarARPEmBlockchainTask" />
+      <bpmn:sequenceFlow id="Flow_1s813e0" sourceRef="GravarARPEmBlockchainTask" targetRef="InserirPecasNoSGPETask" />
+      <bpmn:sequenceFlow id="Flow_0nh13b3" sourceRef="DisponibilizarARPParaConsumoTask" targetRef="GravarInformacoesDaARPEmBlockchainTask" />
+      <bpmn:dataObjectReference id="DataObjectReference_0cve4sw" name="Form1" dataObjectRef="DataObject_0hkkgpm" />
+      <bpmn:dataObject id="DataObject_0hkkgpm" />
+      <bpmn:dataObjectReference id="DataObjectReference_0nxekg0" name="Form2" dataObjectRef="DataObject_1cegxqr" />
+      <bpmn:dataObject id="DataObject_1cegxqr" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_0qb3mo5" sourceRef="GerirAtaDeRegistroDePrecosARPSubProcess" targetRef="ARPDisponivelParaConsumoEndEvent" />
+    <bpmn:textAnnotation id="TextAnnotation_1l5azpe">
+      <bpmn:text>Importar dados do E-Pregão do WebLic</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0df5jfm" sourceRef="EditalAdjudicadoStartEvent" targetRef="TextAnnotation_1l5azpe" />
+    <bpmn:textAnnotation id="TextAnnotation_0d68z48">
+      <bpmn:text>Criar uma ARP para cada fornecedor.
+
+Gravar um Smart Contract para cada ARP.
+
+Gerar uma tarefa "Disponibilizar ARP para consumo" para cada ARP.
+
+Gerar PDF de cada ARP para assinatura.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1cjbist">
+      <bpmn:text>Registrar número e data de publicação no DOE.
+
+Disponibilizar ARP para consumo</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1qgoj2s">
+      <bpmn:text>Gravar no Smart Contract da ARP o número e data da publicação no DOE.
+
+Iniciar vigência da ARP com base na data de publicação no DOE (contagem de tempo)</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1abvnef">
+      <bpmn:text>Inserir informações do gestor das ARPs e processo SGPE associado</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1hjuhel">
+      <bpmn:text>Integração com SGPE
+
+Inserção de documentos em PDF no processo referente ao E-Pregão.
+
+Inserir uma peça no processo SGPE do E-Pregão para cada ARP gerada.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0qh9azn" sourceRef="GravarARPEmBlockchainTask" targetRef="TextAnnotation_0d68z48" />
+    <bpmn:association id="Association_0c6hkif" sourceRef="GravarInformacoesDaARPEmBlockchainTask" targetRef="TextAnnotation_1qgoj2s" />
+    <bpmn:association id="Association_14lji5a" sourceRef="InserirPecasNoSGPETask" targetRef="TextAnnotation_1hjuhel" />
+    <bpmn:association id="Association_1gbquke" sourceRef="DisponibilizarARPParaConsumoTask" targetRef="TextAnnotation_1cjbist" />
+    <bpmn:association id="Association_1hv3uts" sourceRef="ConferirInformacoesDoEditalTask" targetRef="TextAnnotation_1abvnef" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="NDoEditalAdjudicadoProcess">
+      <bpmndi:BPMNEdge id="Flow_0qb3mo5_di" bpmnElement="Flow_0qb3mo5">
+        <di:waypoint x="1240" y="205" />
+        <di:waypoint x="1282" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12m1nbd_di" bpmnElement="Flow_12m1nbd">
+        <di:waypoint x="188" y="205" />
+        <di:waypoint x="230" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="EditalAdjudicadoStartEvent" bioc:stroke="#000" bioc:fill="#fff" color:background-color="#c8e6c9" color:border-color="#43a047">
+        <dc:Bounds x="152" y="187" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="128" y="163" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0e48ph5_di" bpmnElement="ARPDisponivelParaConsumoEndEvent" bioc:stroke="#000" bioc:fill="#fff" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="1282" y="187" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1263" y="230" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1bnnlqg_di" bpmnElement="GerirAtaDeRegistroDePrecosARPSubProcess" isExpanded="true">
+        <dc:Bounds x="230" y="80" width="1010" height="210" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0nh13b3_di" bpmnElement="Flow_0nh13b3">
+        <di:waypoint x="940" y="205" />
+        <di:waypoint x="1000" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1s813e0_di" bpmnElement="Flow_1s813e0">
+        <di:waypoint x="620" y="205" />
+        <di:waypoint x="680" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1prx6m3_di" bpmnElement="Flow_1prx6m3">
+        <di:waypoint x="460" y="205" />
+        <di:waypoint x="520" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1g4lyi1_di" bpmnElement="Flow_1g4lyi1">
+        <di:waypoint x="780" y="205" />
+        <di:waypoint x="840" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04jnrxr_di" bpmnElement="Flow_04jnrxr">
+        <di:waypoint x="306" y="205" />
+        <di:waypoint x="360" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12dmheo_di" bpmnElement="Flow_12dmheo">
+        <di:waypoint x="1100" y="205" />
+        <di:waypoint x="1162" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1e3oc0j_di" bpmnElement="ARPGravadaEmBlockchainEndEvent" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="1162" y="187" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1138" y="230" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12dn2ig_di" bpmnElement="GravarARPEmBlockchainTask">
+        <dc:Bounds x="520" y="165" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0rd18r8_di" bpmnElement="GravarInformacoesDaARPEmBlockchainTask">
+        <dc:Bounds x="1000" y="165" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1ftnn8v_di" bpmnElement="SmartContract2DataObjectReference1" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="1082" y="134" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1074" y="105" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0opxlrn_di" bpmnElement="SmartContract1DataObjectReference" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="292" y="150" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="284" y="121" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1ymzg7t_di" bpmnElement="SmartContract2DataObjectReference" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="602" y="135" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="594" y="106" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0exbnl8_di" bpmnElement="InserirPecasNoSGPETask" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="680" y="165" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_144o79g_di" bpmnElement="DisponibilizarARPParaConsumoTask">
+        <dc:Bounds x="840" y="165" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12yuamg_di" bpmnElement="ConferirInformacoesDoEditalTask">
+        <dc:Bounds x="360" y="165" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1hn9ezi_di" bpmnElement="EditalDisponivelParaAnaliseStartEvent" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="270" y="187" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="248" y="230" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0cve4sw_di" bpmnElement="DataObjectReference_0cve4sw">
+        <dc:Bounds x="442" y="134" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="444" y="113" width="32" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0nxekg0_di" bpmnElement="DataObjectReference_0nxekg0">
+        <dc:Bounds x="922" y="134" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="924" y="113" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1l5azpe_di" bpmnElement="TextAnnotation_1l5azpe">
+        <dc:Bounds x="120" y="313" width="140" height="41" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0d68z48_di" bpmnElement="TextAnnotation_0d68z48">
+        <dc:Bounds x="520" y="313" width="150" height="199" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1cjbist_di" bpmnElement="TextAnnotation_1cjbist">
+        <dc:Bounds x="840" y="313" width="150" height="84" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1qgoj2s_di" bpmnElement="TextAnnotation_1qgoj2s">
+        <dc:Bounds x="1000" y="313" width="180" height="107" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1abvnef_di" bpmnElement="TextAnnotation_1abvnef">
+        <dc:Bounds x="360" y="313" width="150" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1hjuhel_di" bpmnElement="TextAnnotation_1hjuhel" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="680" y="313" width="150" height="156" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0df5jfm_di" bpmnElement="Association_0df5jfm">
+        <di:waypoint x="170" y="223" />
+        <di:waypoint x="170" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0qh9azn_di" bpmnElement="Association_0qh9azn">
+        <di:waypoint x="570" y="245" />
+        <di:waypoint x="570" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0c6hkif_di" bpmnElement="Association_0c6hkif">
+        <di:waypoint x="1050" y="245" />
+        <di:waypoint x="1050" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_14lji5a_di" bpmnElement="Association_14lji5a" bioc:stroke="#e53935" color:border-color="#e53935">
+        <di:waypoint x="730" y="245" />
+        <di:waypoint x="730" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1gbquke_di" bpmnElement="Association_1gbquke">
+        <di:waypoint x="890" y="245" />
+        <di:waypoint x="890" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1hv3uts_di" bpmnElement="Association_1hv3uts">
+        <di:waypoint x="410" y="245" />
+        <di:waypoint x="410" y="313" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
