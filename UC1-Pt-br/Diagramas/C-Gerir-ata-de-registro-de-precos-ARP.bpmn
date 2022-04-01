@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1raac9g" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0-nightly.20210829" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="GerirAtaDeRegistroDePrecosProcess" name="Gerir Ata de Registro de Preços" isExecutable="true">
+    <bpmn:startEvent id="EditalAdjudicadoStartEvent" name="Edital Adjudicado" camunda:formKey="embedded:deployment:form0-selecionar-pregao.html">
+      <bpmn:outgoing>Flow_04qsbi0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_04qsbi0" sourceRef="EditalAdjudicadoStartEvent" targetRef="BuscarDadosDoEditalTask" />
+    <bpmn:sequenceFlow id="Flow_076a7jv" sourceRef="BuscarDadosDoEditalTask" targetRef="ConferirInformacoesDoEditalTask" />
+    <bpmn:sequenceFlow id="Flow_0w742w2" sourceRef="ConferirInformacoesDoEditalTask" targetRef="GerarAtasDeRegistroDePrecosARPsTask" />
+    <bpmn:sequenceFlow id="Flow_1d8ge92" sourceRef="GerarAtasDeRegistroDePrecosARPsTask" targetRef="DisponibilizarARPParaConsumoTask" />
+    <bpmn:sequenceFlow id="Flow_1x3yl39" sourceRef="DisponibilizarARPParaConsumoTask" targetRef="GravarARPEmBlockchainTask" />
+    <bpmn:endEvent id="ARPDisponivelParaConsumoEndEvent" name="ARP disponível para consumo">
+      <bpmn:incoming>Flow_0hfbzih</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0hfbzih" sourceRef="GravarARPEmBlockchainTask" targetRef="ARPDisponivelParaConsumoEndEvent" />
+    <bpmn:userTask id="ConferirInformacoesDoEditalTask" name="Conferir informações do edital" camunda:formKey="embedded:deployment:form-checking_bidding_info.html">
+      <bpmn:incoming>Flow_076a7jv</bpmn:incoming>
+      <bpmn:outgoing>Flow_0w742w2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:dataObjectReference id="Form2DataObjectReference" name="Form2" dataObjectRef="DataObject_1cegxqr" />
+    <bpmn:dataObject id="DataObject_1cegxqr" />
+    <bpmn:dataObjectReference id="SmartContractARPDataObjectReference" name="Smart Contract ARP" dataObjectRef="DataObject_14b04v8" />
+    <bpmn:dataObject id="DataObject_14b04v8" />
+    <bpmn:dataObjectReference id="Form1DataObjectReference" name="Form1" dataObjectRef="DataObject_1g9s4hc" />
+    <bpmn:dataObject id="DataObject_1g9s4hc" />
+    <bpmn:task id="RetentarABuscaDeInformacoesDoEditalTask" name="Retentar a busca de informações do edital" default="Flow_0hamd7o">
+      <bpmn:incoming>Flow_1qsibhi</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hamd7o</bpmn:outgoing>
+      <bpmn:outgoing>Flow_05ymssn</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1qsibhi" sourceRef="ErroAoAcessarOServicoBoundaryEvent" targetRef="RetentarABuscaDeInformacoesDoEditalTask" />
+    <bpmn:sequenceFlow id="Flow_0hamd7o" sourceRef="RetentarABuscaDeInformacoesDoEditalTask" targetRef="BuscarDadosDoEditalTask" />
+    <bpmn:sequenceFlow id="Flow_05ymssn" sourceRef="RetentarABuscaDeInformacoesDoEditalTask" targetRef="EncerradoPorFalhaNaBuscaDeInformacoesDoEditalEndEvent">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" />
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EncerradoPorFalhaNaBuscaDeInformacoesDoEditalEndEvent" name="Encerrado por falha na busca de informações do edital">
+      <bpmn:incoming>Flow_05ymssn</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_19bm8gy" errorRef="Error_0vc6anc" />
+    </bpmn:endEvent>
+    <bpmn:task id="RetentarAGravacaoDaARPTask" name="Retentar a gravação da ARP" default="Flow_1gacjd3">
+      <bpmn:incoming>Flow_17sbl5w</bpmn:incoming>
+      <bpmn:outgoing>Flow_1gacjd3</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0nezafs</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_17sbl5w" sourceRef="ErroAoAcessarOServicoBoundaryEvent1" targetRef="RetentarAGravacaoDaARPTask" />
+    <bpmn:sequenceFlow id="Flow_1gacjd3" sourceRef="RetentarAGravacaoDaARPTask" targetRef="GravarARPEmBlockchainTask" />
+    <bpmn:sequenceFlow id="Flow_0nezafs" sourceRef="RetentarAGravacaoDaARPTask" targetRef="EncerradoPorFalhaNaGravacaoDeInformacoesDaARPEndEvent">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" />
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EncerradoPorFalhaNaGravacaoDeInformacoesDaARPEndEvent" name="Encerrado por falha na gravação de informações da ARP">
+      <bpmn:incoming>Flow_0nezafs</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0lleyat" errorRef="Error_155syfk" />
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="ErroAoAcessarOServicoBoundaryEvent" name="Erro ao&#10;acessar o&#10;serviço" attachedToRef="BuscarDadosDoEditalTask">
+      <bpmn:outgoing>Flow_1qsibhi</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0jspxqo" errorRef="Error_00dh7tj" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="ErroAoAcessarOServicoBoundaryEvent1" name="Erro ao&#10;acessar o&#10;serviço" attachedToRef="GravarARPEmBlockchainTask">
+      <bpmn:outgoing>Flow_17sbl5w</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1b5aj5k" errorRef="Error_00dh7tj" />
+    </bpmn:boundaryEvent>
+    <bpmn:serviceTask id="BuscarDadosDoEditalTask" name="Buscar dados do edital" camunda:asyncBefore="true">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script />
+        </camunda:executionListener>
+        <camunda:connector>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+        <camunda:failedJobRetryTimeCycle>R5/PT5S</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_04qsbi0</bpmn:incoming>
+      <bpmn:incoming>Flow_0hamd7o</bpmn:incoming>
+      <bpmn:outgoing>Flow_076a7jv</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:scriptTask id="GerarAtasDeRegistroDePrecosARPsTask" name="Gerar Atas de Registro de Preços (ARPs)">
+      <bpmn:incoming>Flow_0w742w2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1d8ge92</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:serviceTask id="GravarARPEmBlockchainTask" name="Gravar ARP em blockchain">
+      <bpmn:incoming>Flow_1x3yl39</bpmn:incoming>
+      <bpmn:incoming>Flow_1gacjd3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hfbzih</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="DisponibilizarARPParaConsumoTask" name="Disponibilizar ARP para consumo">
+      <bpmn:incoming>Flow_1d8ge92</bpmn:incoming>
+      <bpmn:outgoing>Flow_1x3yl39</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:textAnnotation id="TextAnnotation_1ibqtl9">
+      <bpmn:text>Importar dados do E-pregão.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1evxz14" sourceRef="BuscarDadosDoEditalTask" targetRef="TextAnnotation_1ibqtl9" />
+    <bpmn:textAnnotation id="TextAnnotation_07lodvc">
+      <bpmn:text>Registrar informações do gestor de ARP e processo SGPE associado.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_03qkref" sourceRef="ConferirInformacoesDoEditalTask" targetRef="TextAnnotation_07lodvc" />
+    <bpmn:textAnnotation id="TextAnnotation_0zxzln3">
+      <bpmn:text>Gerar uma ARP para cada fornecedor;
+
+Gerar uma tarefa "Disponibilizar ARP para consumo" para cada ARP gerada.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0uuqzpv" sourceRef="GerarAtasDeRegistroDePrecosARPsTask" targetRef="TextAnnotation_0zxzln3" />
+    <bpmn:textAnnotation id="TextAnnotation_1s2j8q4">
+      <bpmn:text>Registrar número e data de publicação no DOE;
+
+Disponibilizar ARP para consumo.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1hs44mo" sourceRef="DisponibilizarARPParaConsumoTask" targetRef="TextAnnotation_1s2j8q4" />
+    <bpmn:textAnnotation id="TextAnnotation_1vpuo00">
+      <bpmn:text>Criar instância do Smart Contract ARP;
+
+Iniciar vigência do SM-ARP com base na data de publicação no DOE.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0ae0nha" sourceRef="GravarARPEmBlockchainTask" targetRef="TextAnnotation_1vpuo00" />
+  </bpmn:process>
+  <bpmn:error id="Error_0vc6anc" name="falha-busca-edital-encerrado" errorCode="667" />
+  <bpmn:error id="Error_00dh7tj" name="erro-acesso-servico" errorCode="666" />
+  <bpmn:error id="Error_15gbiat" />
+  <bpmn:error id="Error_155syfk" name="falha-gravacao-arp-encerrado" errorCode="668" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="GerirAtaDeRegistroDePrecosProcess">
+      <bpmndi:BPMNEdge id="Flow_0nezafs_di" bpmnElement="Flow_0nezafs">
+        <di:waypoint x="980" y="460" />
+        <di:waypoint x="1032" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gacjd3_di" bpmnElement="Flow_1gacjd3">
+        <di:waypoint x="880" y="460" />
+        <di:waypoint x="860" y="460" />
+        <di:waypoint x="860" y="340" />
+        <di:waypoint x="880" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17sbl5w_di" bpmnElement="Flow_17sbl5w">
+        <di:waypoint x="930" y="378" />
+        <di:waypoint x="930" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05ymssn_di" bpmnElement="Flow_05ymssn">
+        <di:waypoint x="340" y="460" />
+        <di:waypoint x="392" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hamd7o_di" bpmnElement="Flow_0hamd7o">
+        <di:waypoint x="240" y="460" />
+        <di:waypoint x="220" y="460" />
+        <di:waypoint x="220" y="340" />
+        <di:waypoint x="240" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qsibhi_di" bpmnElement="Flow_1qsibhi">
+        <di:waypoint x="290" y="378" />
+        <di:waypoint x="290" y="420" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="256" y="396" width="87" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hfbzih_di" bpmnElement="Flow_0hfbzih">
+        <di:waypoint x="980" y="320" />
+        <di:waypoint x="1032" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1x3yl39_di" bpmnElement="Flow_1x3yl39">
+        <di:waypoint x="820" y="320" />
+        <di:waypoint x="880" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1d8ge92_di" bpmnElement="Flow_1d8ge92">
+        <di:waypoint x="660" y="320" />
+        <di:waypoint x="720" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0w742w2_di" bpmnElement="Flow_0w742w2">
+        <di:waypoint x="500" y="320" />
+        <di:waypoint x="560" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_076a7jv_di" bpmnElement="Flow_076a7jv">
+        <di:waypoint x="340" y="320" />
+        <di:waypoint x="400" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04qsbi0_di" bpmnElement="Flow_04qsbi0">
+        <di:waypoint x="188" y="320" />
+        <di:waypoint x="240" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1r3wb69_di" bpmnElement="EditalAdjudicadoStartEvent" bioc:stroke="#000" bioc:fill="#fff" color:background-color="#c8e6c9" color:border-color="#43a047">
+        <dc:Bounds x="152" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="127" y="345" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1az1fq0_di" bpmnElement="ConferirInformacoesDoEditalTask">
+        <dc:Bounds x="400" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0nxekg0_di" bpmnElement="Form2DataObjectReference" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="802" y="245" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="805" y="224" width="32" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0zgq35k_di" bpmnElement="SmartContractARPDataObjectReference" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="962" y="245" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="943" y="217" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0n772eb_di" bpmnElement="Form1DataObjectReference" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="482" y="245" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="484" y="224" width="32" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_191d1lb_di" bpmnElement="RetentarABuscaDeInformacoesDoEditalTask">
+        <dc:Bounds x="240" y="420" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ix6pbq_di" bpmnElement="RetentarAGravacaoDaARPTask">
+        <dc:Bounds x="880" y="420" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0v6ckxm_di" bpmnElement="BuscarDadosDoEditalTask">
+        <dc:Bounds x="240" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1803zrl_di" bpmnElement="GerarAtasDeRegistroDePrecosARPsTask">
+        <dc:Bounds x="560" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0uhcot8_di" bpmnElement="GravarARPEmBlockchainTask">
+        <dc:Bounds x="880" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1ibqtl9_di" bpmnElement="TextAnnotation_1ibqtl9">
+        <dc:Bounds x="240" y="80" width="100" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_07lodvc_di" bpmnElement="TextAnnotation_07lodvc">
+        <dc:Bounds x="400" y="80" width="140" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0zxzln3_di" bpmnElement="TextAnnotation_0zxzln3">
+        <dc:Bounds x="560" y="80" width="130" height="110" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1s2j8q4_di" bpmnElement="TextAnnotation_1s2j8q4">
+        <dc:Bounds x="720" y="80" width="118" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1vpuo00_di" bpmnElement="TextAnnotation_1vpuo00">
+        <dc:Bounds x="880" y="80" width="162" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0w5uzpa_di" bpmnElement="EncerradoPorFalhaNaBuscaDeInformacoesDoEditalEndEvent" bioc:stroke="#000" bioc:fill="#fff" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="392" y="442" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="366" y="489" width="87" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0cm0ba8_di" bpmnElement="ARPDisponivelParaConsumoEndEvent" bioc:stroke="#000" bioc:fill="#fff" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="1032" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1013" y="345" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1iuowo4_di" bpmnElement="EncerradoPorFalhaNaGravacaoDeInformacoesDaARPEndEvent" bioc:stroke="#000" bioc:fill="#fff" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="1032" y="442" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1012" y="483" width="76" height="66" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0r1kvcr_di" bpmnElement="DisponibilizarARPParaConsumoTask">
+        <dc:Bounds x="720" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1da7jyz_di" bpmnElement="ErroAoAcessarOServicoBoundaryEvent1" bioc:stroke="#000" bioc:fill="#fff" color:background-color="#e1bee7" color:border-color="#8e24aa">
+        <dc:Bounds x="912" y="342" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="946" y="370" width="48" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1mgc1n3_di" bpmnElement="ErroAoAcessarOServicoBoundaryEvent" bioc:stroke="#000" bioc:fill="#fff" color:background-color="#e1bee7" color:border-color="#8e24aa">
+        <dc:Bounds x="272" y="342" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="305" y="370" width="48" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1evxz14_di" bpmnElement="Association_1evxz14">
+        <di:waypoint x="290" y="280" />
+        <di:waypoint x="290" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_03qkref_di" bpmnElement="Association_03qkref">
+        <di:waypoint x="450" y="280" />
+        <di:waypoint x="450" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0uuqzpv_di" bpmnElement="Association_0uuqzpv">
+        <di:waypoint x="610" y="280" />
+        <di:waypoint x="610" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1hs44mo_di" bpmnElement="Association_1hs44mo">
+        <di:waypoint x="770" y="280" />
+        <di:waypoint x="770" y="176" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0ae0nha_di" bpmnElement="Association_0ae0nha">
+        <di:waypoint x="930" y="280" />
+        <di:waypoint x="930" y="176" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

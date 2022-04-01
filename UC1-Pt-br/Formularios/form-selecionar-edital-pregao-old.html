@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <!--Metadados-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        
+        <!--Folha de estilo CSS-->
+        <link rel="stylesheet" type="text/css" href="smart-sc-style.css" media="screen">
+        
+        <!--Título da página (o que aparece na aba)-->
+        <title>Selecionar Edital de Pregão</title>
+    </head>
+    <body>
+        <div class="body">
+            <h1 id="titulo">Selecionar Edital de Pregão</h1><br>
+            <p><strong>(a) analista, selecione abaixo o edital desejado.</strong></p>
+        </div>
+        <div>
+            <form>
+                Órgão <input type="text" name="Orgao" id="editalOrgao">
+                Nº do Edital <input type="text" name="numeroDoEdital" id="editalNumero">
+                Ano <input type="text" name="Ano" id="editalAno">
+            </form><br>
+            <div>
+                <h2>Tipo de Edital</h2>
+                <input type="radio" name="materialDeListaBasica" id="editalTipoMatListBasic"> Material de Lista Básica
+                <input type="radio" name="outrosMateriais" id="editalTipoMatOutros"> Outros Materiais
+                <input type="radio" name="Servicos" id="editalTipoServ"> Serviços
+            </div>
+            <div>
+                <h2>Materiais da Lista Básica</h2>
+                <select id="matListBasic">
+                    <option selected disabled value="" >Selecione</option>
+                    <option>Produto A</option>
+                    <option>Produto B</B></option>
+                    <option>Produto C</option>
+                </select>
+            </div>
+            <div>
+                <h2>Teste de uso de checkbox em formulário</h2>
+                <input type="checkbox" id="testeDeUsoDeCheckbox" name="testeDeUsoDeCheckbox" value="HTML">HTML
+            </div>
+        </div><br>
+        <button type="submit">Selecionar Edital</button>
+    </body>
+</html>
