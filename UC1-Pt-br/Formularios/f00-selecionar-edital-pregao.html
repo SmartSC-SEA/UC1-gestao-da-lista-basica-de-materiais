@@ -1,0 +1,28 @@
+<!--O objetivo desse formulário é buscar os dados referentes à um edital específico e criação de tabela com os dados relativos a esse edital-->
+
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <link rel="stylesheet" type="text/css" href="smart-sc-style.css" media="screen">        
+        <title>Selecionar Edital de Pregão</title>
+    </head>
+    <body>
+        <div>
+            <h1>Selecionar Edital de Pregão</h1><br>
+            <p>Prezado(a) analista, bem vindo ao SMART SC, sua plataforma de contratos inteligentes!<br><br>
+                Para iniciar a preparação das Atas de Registro de Preços para consumo, por favor,<br>
+                digite abaixo o edital a ser utilizado.</p><br>
+        </div>
+        <form>
+            <!--O campo "Órgão" pode ser um do tipo drill down, com a relação dos órgãos do PE (vou solicitar essa tabela à Silvia).-->
+            Órgão <input type="text" name="Orgao" id="editalOrgao">
+            Nº do Edital <input type="text" name="numeroDoEdital" id="editalNumero">
+            Ano <input type="text" name="Ano" id="editalAno">
+        </form><br>
+    </body>
+</html>
+
+ <!--A partir dos dados inseridos no formulário deve ser feita a busca das informações do edital e criação de tabela com os dados do edital
+        para fins de criação da base de informações para o formulário 2.-->

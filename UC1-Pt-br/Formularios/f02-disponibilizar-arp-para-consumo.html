@@ -1,0 +1,57 @@
+<!--
+O objetivo deste formulário é rgistrar as informações da publicação da Atar de Registro de Preços no
+Diário Oficial do Estado e gravar a ARP em blockchain para consumo dos materiais.
+
+O formulário representa a ARP, que é o contrato estabelecido entre um dado fornecedor e o Governo do Estado.
+No formulário deve constar todas as informações referentes aos lotes e produtos cujo fornecedor está autorizado
+a negociar com o Estado. 
+
+A partir dessas informações será gravado o smart contract em blockchain e será dado 
+início à sua vigência de acordo com a data de publicação no DOE. A partir de sua publicação a ARP terá vigência
+de 365 dias, sendo que deverá ser encerrada após passado esse período.
+-->
+
+<html lang='en'>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <link rel="stylesheet" type="text/css" href="smart-sc-style.css" media="screen">        
+        <title>Disponibilizar ARP para consumo</title>
+    </head>
+    <div>
+        <h1>Ata de Registro de Preços - ARP Nº [prd_number]<!--Número de ARP gerado a partir da conclusão do f01--></h1><br>
+        <h2>(Associada ao processo SGP-e [agencyAcronyms] [processNumber] / [year])<!--Campos digitados no f01--></h2><br>
+        <p>
+            O Estado de Santa Catarina, por intermédio da Secretaria de Estado da Administração, com sede na Rodovia SC 401, km 05, 
+            nº 4600, Bloco II, Bairro Saco Grande II, Florianópolis/SC, inscrita no CNPJ sob nº 82.951.351/0001-42, doravante denominado
+            Órgão Gerenciador, neste ato representada pelo seu Secretário de Estado da Administração, designado, Sr. [PRDManagerName] <!-- Campo do f01-->, 
+            portador do CPF nº [PRDManagerCPF] <!-- Campo do f01-->, nos termos do art. 15 da lei nº 8.666, de 21 de Junho de 1993<!--Conferir atualização da lei-->, 
+            em face da classificação das propostas apresentadas no pregão eletrônico nº [editalOrgao] [editalNumero] / [editalAno]<!-- Campos do f00-->, 
+            para registro de preços, resolve REGISTRAR OS PREÇOS das empresas com preços mais vantajosos, por lote, sujeitando-se as partes 
+            ao Edital de pregão eletrônico nº [editalOrgao] [editalNumero] / [editalAno], às determinações da Lei Federal nº 10.520, de 17 de 
+            Julho de 2002, Lei Estadual nº 12.337, de 5 de Julho de 2002, com aplicação subsidiária da Lei Federal nº 8.666, de 21 de Junho de 
+            1993, Decreto Estadual nº 2.617, de 16 de Setembro de 2009, alterações posteriores, demais normas legais federais e estaduais 
+            vigentes e pelas cláusulas e condições que se seguem:
+        </p><br>
+    </div>
+        <p>
+            ---<br>
+            Empresa:[supplier_name] - CNPJ: [supplier_cnpj]<br>
+            Endereço: [supplier_adress]<br>
+            Representante:[supplier_rep] - CPF: [supplier_rep_cpf] - E-mail: [supplier_rep_email]<br><br>
+            ---<br><br>
+            Lote: [lot_number] - [lot_description]<br>
+            Item: [item_number] - Descrição: [item_description]<br>
+            Unidade de Medida: [item_measure_unit] - Quantidade: [item-quant] - Preço Unitário: [item_unit_price] - Marca: [item_brand]<br>
+            ---<br><br>
+            Lote: [lot_number] - [lot_description]<br>
+            Item: [item_number] - Descrição: [item_description]<br>
+            Unidade de Medida: [item_measure_unit] - Quantidade: [item-quant] - Preço Unitário: [item_unit_price] - Marca: [item_brand]
+        </p><br>
+    <form>
+        Nº da publicação no DOE <input type="number" name="num_public_doe" id="numPublicDoe">
+        Data da publicação no DOE <input type="date" name="date_public_doe" id="datePublicDoe">
+        <p><strong>(*) A data de publicação no DOE é a data a partir da qual se inicia a vigência de 365 dias da ARP.</strong></p><br>
+    </form>
+
+

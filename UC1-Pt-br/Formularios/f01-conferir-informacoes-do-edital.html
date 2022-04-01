@@ -1,0 +1,143 @@
+
+<!--
+form 01: O objetivo deste formulário é apresentar ao analista de ARP as informações referentes ao edital de pregão selecionado anteriormente
+e permitir o registro das informações sobre o gestor de Atas do órgão e do processo SGPE associado ao processo licitatório.
+
+O formulário deverá puxar as informações do edital selecionado contidas em base de dados do camunda (dados off-chain).
+
+Após a inserção das informações por parte do analista deverá gerar uma ARP para cada fornecedor constante no edital.
+
+Essa ARP pode ser via criação de uma coluna na tabela do edital com o numero específico de cada uma das ARPs
+(numero do edital - numero sequencial ARP). OU uma nova tabela para cada uma das ARPs gerada.
+Nesse caso a nova tabela deverá conter também as informações do gestor de ARP e do processo SGPE inseridas no form anterior.
+
+Para cada ARP deverá ser gerada no camunda task list uma nova tarefa de usuário para cada ARP, que será apresentada ao analista de ARP
+via formulário 03.
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+    <link rel="stylesheet" type="text/css" href="smart-sc-style.css" media="screen">        
+    <title>Conferir informações do edital</title>
+  </head>
+  <body>
+    <h1>Edital de Pregão [SEA 0043/2021]</h1><br>
+    <p>
+      Prezado(a) analista,<br><br>
+      A tabela abaixo apresenta as informações para criação da Ata de Registro de Preços (ARP) para cada um dos fornecedores
+       constantes no edital em análise e detalhada em nível de itens. Por favor, verifique as informações constantes na tabela
+       e registre os dados relativos ao Gestor de ARPs de seu órgão (O Secretário de Estado) e as informações relativas ao processo SGPE associado.<br><br>
+      Após registrar as informações, clique em "Concluir" para efetuar a geração das ARPs.
+    </p>
+    <table>
+      <tr>
+        <th>Fornecedor</th>
+        <th>CNPJ</th>
+        <th>Nº do lote</th>
+        <th>Descrição do lote</th>
+        <th>Nº do item<!--conforme edital--></th>
+        <th>Código do item<!--conforme lista básica de materiais--></th>
+        <th>Descrição do item<!--conforme lista básica de materiais--></th>
+        <th>Unidade de medida<!--do item--></th>
+        <th>Quantidade<!--do item--></th>
+        <th>Preço unitário<!--do item--></th>
+        <th>Marca<!--do item--></th>
+      </tr>
+      <tr>
+        <!--Campos preenchidos somente como exemplo-->
+        <th>Aquimpel</th>
+        <th>000.000.000-00</th>
+        <th>IV</th>
+        <th>Descrição do lote vem aqui</th>
+        <th>04</th>
+        <th>032-213-25</th>
+        <th>Cola plástica tipo tubo</th>
+        <th>Bastão</th>
+        <th>45.000</th>
+        <th>R$ 2,50</th>
+        <th>Cascolar</th>
+      </tr>
+      <tr>
+        <!--Campos preenchidos somente como exemplo-->
+        <th>...</th>
+        <th>...</th>
+        <th>...</th>
+        <th>...</th>
+        <th>...</th>
+        <th>...</th>
+        <th>...</th>
+        <th>...</th>
+        <th>...</th>
+        <th>...</th>
+        <th>...</th>
+      </tr>
+    </table><br>
+    <form>
+      <div class="PRDManager">
+        <label for="PRDManagerName">Gestor de Atas de Registro de Preço</label>
+          <input
+            id="PRDManagerName"
+            class="form-control"
+            required
+            type="text"
+            cam-variable-name="PRDManagerName"
+            cam-variable-type="String"
+            placeholder="Nome completo"
+            ng-minlength="2"
+            ng-maxlength="40"
+          />
+        <label for="PRDManagerCPF">CPF</label>
+            <input
+            id="PRDManagerCPF"
+            class="form-control"
+            required
+            type="text"
+            cam-variable-name="PRDManagerCPF"
+            cam-variable-type="String"
+            placeholder="000.000.000-00"
+            ng-minlength="7"
+            ng-maxlength="10"
+          />
+      </div>
+      <div class="SGPEProcess">
+        <label for="SGPEProcess">Processo SGP-e associado</label>
+          <input
+            id="agencyAcronyms"
+            class="form-control"
+            required
+            type="text"
+            cam-variable-name="agencyAcronyms"
+            cam-variable-type="String"
+            placeholder="Órgão"
+            ng-minlength="2"
+            ng-maxlength="40"
+          />
+          <input
+            id="processNumber"
+            class="form-control"
+            required
+            type="text"
+            cam-variable-name="processNumber"
+            cam-variable-type="String"
+            placeholder="Nº do processo"
+            ng-minlength="7"
+            ng-maxlength="10"
+          />
+           / <input
+            id="year"
+            class="form-control"
+            required
+            type="text"
+            cam-variable-name="year"
+            cam-variable-type="String"
+            placeholder="Ano"
+            ng-minlength="2"
+            ng-maxlength="4"
+          />
+      </div>   
+    </form>
+  </body>
+  </html>

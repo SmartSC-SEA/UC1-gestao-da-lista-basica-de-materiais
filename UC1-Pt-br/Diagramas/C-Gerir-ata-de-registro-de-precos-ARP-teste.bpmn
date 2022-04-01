@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0qyr5jj" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0-nightly.20210829" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="GerirAtaDeRegistroDePrecosProcess" name="Gerir Ata de Registro de Preços" isExecutable="true">
+    <bpmn:startEvent id="EditalAdjudicadoStartEvent" name="Edital adjudicado" camunda:formKey="embedded:deployment:f00-selecionar-edital-pregao.html">
+      <bpmn:outgoing>Flow_055rdw9</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_055rdw9" sourceRef="EditalAdjudicadoStartEvent" targetRef="BuscarDadosDoEditalTask" />
+    <bpmn:endEvent id="ARPDisponivelParaConsumoEndEvent" name="ARP disponível para consumo">
+      <bpmn:incoming>Flow_1k5e6yt</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0wiqnv1" sourceRef="ConferirInformacoesDoEditalTask" targetRef="GerarAtaDeRegistroDePrecosTask" />
+    <bpmn:userTask id="ConferirInformacoesDoEditalTask" name="Conferir informações do edital" camunda:formKey="embedded:deployment:f01-conferir-informacoes-do-edital.html">
+      <bpmn:incoming>Flow_16sqkxg</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wiqnv1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0y9c6pv" sourceRef="DisponibilizarARPParaConsumoTask" targetRef="GravarARPEmBlockchainTask" />
+    <bpmn:userTask id="DisponibilizarARPParaConsumoTask" name="Disponibilizar ARP para consumo" camunda:formKey="embedded:deployment:f02-disponibilizar-arp-para-consumo.html">
+      <bpmn:incoming>Flow_00tnea1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0y9c6pv</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_16sqkxg" sourceRef="BuscarDadosDoEditalTask" targetRef="ConferirInformacoesDoEditalTask" />
+    <bpmn:task id="GerarAtaDeRegistroDePrecosTask" name="Gerar Ata de Registro de Preços">
+      <bpmn:incoming>Flow_0wiqnv1</bpmn:incoming>
+      <bpmn:outgoing>Flow_00tnea1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_00tnea1" sourceRef="GerarAtaDeRegistroDePrecosTask" targetRef="DisponibilizarARPParaConsumoTask" />
+    <bpmn:task id="GravarARPEmBlockchainTask" name="Gravar ARP em blockchain">
+      <bpmn:incoming>Flow_0y9c6pv</bpmn:incoming>
+      <bpmn:outgoing>Flow_1k5e6yt</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1k5e6yt" sourceRef="GravarARPEmBlockchainTask" targetRef="ARPDisponivelParaConsumoEndEvent" />
+    <bpmn:task id="BuscarDadosDoEditalTask" name="Buscar dados do edital">
+      <bpmn:incoming>Flow_055rdw9</bpmn:incoming>
+      <bpmn:outgoing>Flow_16sqkxg</bpmn:outgoing>
+    </bpmn:task>
+  </bpmn:process>
+  <bpmn:error id="Error_0fbh8j9" />
+  <bpmn:error id="Error_0wvcjx4" name="erroAoAcessarOServico" errorCode="01" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="GerirAtaDeRegistroDePrecosProcess">
+      <bpmndi:BPMNEdge id="Flow_1k5e6yt_di" bpmnElement="Flow_1k5e6yt">
+        <di:waypoint x="970" y="117" />
+        <di:waypoint x="1022" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00tnea1_di" bpmnElement="Flow_00tnea1">
+        <di:waypoint x="670" y="117" />
+        <di:waypoint x="720" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16sqkxg_di" bpmnElement="Flow_16sqkxg">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="420" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0y9c6pv_di" bpmnElement="Flow_0y9c6pv">
+        <di:waypoint x="820" y="117" />
+        <di:waypoint x="870" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wiqnv1_di" bpmnElement="Flow_0wiqnv1">
+        <di:waypoint x="520" y="117" />
+        <di:waypoint x="570" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_055rdw9_di" bpmnElement="Flow_055rdw9">
+        <di:waypoint x="218" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="EditalAdjudicadoStartEvent" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
+        <dc:Bounds x="182" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="159" y="142" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1q546gi_di" bpmnElement="ARPDisponivelParaConsumoEndEvent" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="1022" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1003" y="142" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yzpumz_di" bpmnElement="ConferirInformacoesDoEditalTask">
+        <dc:Bounds x="420" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1n006ib_di" bpmnElement="DisponibilizarARPParaConsumoTask">
+        <dc:Bounds x="720" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0wtl6bt_di" bpmnElement="GerarAtaDeRegistroDePrecosTask">
+        <dc:Bounds x="570" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1265sj0_di" bpmnElement="GravarARPEmBlockchainTask">
+        <dc:Bounds x="870" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ixscx0_di" bpmnElement="BuscarDadosDoEditalTask">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
