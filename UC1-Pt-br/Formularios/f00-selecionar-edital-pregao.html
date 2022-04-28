@@ -15,11 +15,95 @@
                 Para iniciar a preparação das Atas de Registro de Preços para consumo, por favor,<br>
                 digite abaixo o edital a ser utilizado.</p><br>
         </div>
-        <form>
+        <form action="passa-codigo-do-orgao" method="post">
             <!--O campo "Órgão" pode ser um do tipo drill down, com a relação dos órgãos do PE (vou solicitar essa tabela à Silvia).-->
-            Órgão <input type="text" name="Orgao" id="editalOrgao">
-            Nº do Edital <input type="text" name="numeroDoEdital" id="editalNumero">
-            Ano <input type="text" name="Ano" id="editalAno">
+            <div>
+                <label for="orgao">Órgão: </label>
+                <select name="select-orgao">
+                    <option value="selecione o orgao desejado" disabled selected>selecione o órgão desejado</option>
+                    <option value="2300">2300 - Agência de Desenvolvimento do Turismo - SANTUR</option>
+                    <option value="2352">9101 - Agência de Desenvolvimento Regional - Araranguá</option>
+                    <option value="2353">8401 - Agência de Desenvolvimento Regional - Blumenau</option>
+                    <option value="2354">7701 - Agência de Desenvolvimento Regional - Campos Novos</option>
+                    <option value="2355">7301 - Agência de Desenvolvimento Regional - Chapecó</option>
+                    <option value="2356">7501 - Agência de Desenvolvimento Regional - Concórdia</option>
+                    <option value="2357">9001 - Agência de Desenvolvimento Regional - Criciúma</option>
+                    <option value="2358">8001 - Agência de Desenvolvimento Regional - Curitibanos</option>
+                    <option value="2359">8601 - Agência de Desenvolvimento Regional - Itajaí</option>
+                    <option value="2360">9301 - Agência de Desenvolvimento Regional - Jaraguá do Sul</option>
+                    <option value="2361">7601 - Agência de Desenvolvimento Regional - Joaçaba</option>
+                    <option value="2362">9201 - Agência de Desenvolvimento Regional - Joinville</option>
+                    <option value="2363">9601 - Agência de Desenvolvimento Regional - Lages</option>
+                    <option value="2364">9401 - Agência de Desenvolvimento Regional - Mafra</option>
+                    <option value="2365">7101 - Agência de Desenvolvimento Regional - Maravilha</option>
+                    <option value="2366">8101 - Agência de Desenvolvimento Regional - Rio do Sul</option>
+                    <option value="2367">7201 - Agência de Desenvolvimento Regional - São Lourenço do Oeste</option>
+                    <option value="2368">7001 - Agência de Desenvolvimento Regional - São Miguel do Oeste</option>
+                    <option value="2369">8901 - Agência de Desenvolvimento Regional - Tubarão</option>
+                    <option value="2370">7801 - Agência de Desenvolvimento Regional - Videira</option>
+                    <option value="2371">7401 - Agência de Desenvolvimento Regional - Xanxerê</option>
+                    <option value="2301">302 - Agência de Fomento do Estado de Santa Catarina - BADESC</option>
+                    <option value="2302">2729 - Agência de Regulação de Serviços Públicos de Santa Catarina - ARESC</option>
+                    <option value="2303">4101 - Casa Civil - CC</option>
+                    <option value="2304">301 - Centro de Informática e Automação de Santa Catarina - CIASC</option>
+                    <option value="2305">2622 - Companhia de Habitação do Estado de Santa Catarina S/A - COHAB/SC</option>
+                    <option value="2306">4422 - Companhia Integrada de Desenv. Agricola de Santa Catarina - CIDASC</option>
+                    <option value="2307">4107 - Controladoria Geral do Estado</option>
+                    <option value="2308">1685 - Corpo de Bombeiros Militar - CBM/SC - Fundo de Melhoria</option>
+                    <option value="2309">1501 - Defensoria Pública do Estado de Santa Catarina - DPE</option>
+                    <option value="2310">5501 - Defesa Cívil - DC</option>
+                    <option value="2372">5323 - Departamento de Transportes e Terminais - DETER</option>
+                    <option value="2311">5325 - Departamento Estadual de Infraestrutura - DEINFRA</option>
+                    <option value="2312">4112 - Departamento Estadual de Trânsito - DETRAN/SC</option>
+                    <option value="2313">9 - Empresa de Pesquisa Agropecuária e Extensão Rural de Santa Catarina - EPAGRI</option>
+                    <option value="2314">2322 - Fundação Catarinense de Cultura - FCC</option>
+                    <option value="2315">4521 - Fundação Catarinense de Educação Especial - FCEE</option>
+                    <option value="2316">2006 - Fundação Catarinense de Esporte - FCE</option>
+                    <option value="2317">4524 - Fundação de Amparo á Pesquisa  e Inovação do Estado de Santa Catarina - FAPESC</option>
+                    <option value="2318">200 - Fundação de Previdência Complementar do Estado de Santa Catarina - SCPREV</option>
+                    <option value="2319">5230 - Fundação Escola de Governo - ENA</option>
+                    <option value="2320">4522 - Fundação Universidade do Estado de Santa Catarina - UDESC</option>
+                    <option value="2321">4201 - Gabinete do Vice-Governador - GVG</option>
+                    <option value="2322">1504 - Imprensa Oficial do Estado de Santa Catarina - IOESC</option>
+                    <option value="2323">4722 - Instituto de Previdência do Estado de Santa Catarina - IPREV</option>
+                    <option value="2324">2721 - Instituto do Meio Ambiente - IMA</option>
+                    <option value="2325">5222 - Junta Comercial do Estado de Santa Catarina - JUCESC</option>
+                    <option value="2326">4301 - Ministério Público de Contas do Estado de Santa Catarina - MPC</option>
+                    <option value="2327">4001 - Ministério Público do Estado de Santa Catarina Procuradoria Geral de Justiça - MPSC</option>
+                    <option value="2328">1699 - Polícia Científica de Santa Catarina</option>
+                    <option value="2329">1605 - Polícia Civil - PC</option>
+                    <option value="2330">1606 - Polícia Militar do Estado de Santa Catarina - PM/SC</option>
+                    <option value="2331">201 - Procuradoria Geral do Estado de Santa Catarina - PGE</option>
+                    <option value="2332">111 - Santa Catarina Participação e Investimentos S.A.</option>
+                    <option value="2333">2323 - Santa Catarina Turismo S.A. - SCTUR</option>
+                    <option value="2334">1823 - SC Participações e Parcerias S.A. - SCPar</option>
+                    <option value="2335">4126 - SCPAR Porto de Imbituba S/A</option>
+                    <option value="2336">4130 - SCPAR Porto de São Francisco do Sul S/A</option>
+                    <option value="2337">1700 - Secretaria de Estado da Administração - SEA</option>
+                    <option value="2338">801 - Secretaria de Estado da Administração Prisional e Socioeducativa - SAP</option>
+                    <option value="2339">4401 - Secretaria de Estado da Agricultura e da Pesca - SAR</option>
+                    <option value="2340">4501 - Secretaria de Estado da Educação - SED</option>
+                    <option value="2341">5201 - Secretaria de Estado da Fazenda - SEF</option>
+                    <option value="2342">5301 - Secretaria de Estado da Infraestrutura e Mobilidade - SIE</option>
+                    <option value="2343">4891 - Secretaria de Estado da Saúde - SES</option>
+                    <option value="2344">1601 - Secretaria de Estado da Segurança Pública - SSP</option>
+                    <option value="2345">2700 - Secretaria de Estado do Desenvolvimento Econômico Sustentável - SDE</option>
+                    <option value="2346">2601 - Secretaria de Estado do Desenvolvimento Social - SDS</option>
+                    <option value="2347">1801 - Secretaria de Estado do Planejamento - SPG</option>
+                    <option value="2348">4103 - Secretaria Executiva de Articulação Nacional - SAI</option>
+                    <option value="2349">5801 - Secretaria Executiva de Comunicação - SEC</option>
+                    <option value="2350">1802 - Superintendência de Desenvolvimento da Região Metropolitana da Grande Florianópolis</option>
+                    <option value="2351">4002 - Tribunal de Contas do Estado de Santa Catarina - TCE</option>
+                </select>
+            </div>
+            <div>
+                <label for="editalNumero">Número do Edital: </label>
+                <input type="text" name="numeroDoEdital" id="editalNumero">
+            </div>
+            <div>   
+                <label for="editalAno">Ano: </label>
+                <input type="text" name="Ano" id="editalAno">
+            </div>        
         </form><br>
     </body>
 </html>
