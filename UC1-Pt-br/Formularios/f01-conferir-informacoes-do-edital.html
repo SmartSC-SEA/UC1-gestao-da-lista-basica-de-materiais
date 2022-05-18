@@ -1,4 +1,3 @@
-
 <!--
 form 01: O objetivo deste formulário é apresentar ao analista de ARP as informações referentes ao edital de pregão selecionado anteriormente
 e permitir o registro das informações sobre o gestor de Atas do órgão e do processo SGPE associado ao processo licitatório.
@@ -24,7 +23,7 @@ via formulário 03.
     <title>Conferir informações do edital</title>
   </head>
   <body>
-    <h1>Edital de Pregão [SEA 0043/2021]</h1><br>
+    <h1>Edital de Pregão [Agency]-[biddingProcessNumber]</h1><br>
     <p>
       Prezado(a) analista,<br><br>
       A tabela abaixo apresenta as informações para criação da Ata de Registro de Preços (ARP) para cada um dos fornecedores
@@ -34,17 +33,17 @@ via formulário 03.
     </p>
     <table>
       <tr>
-        <th>Fornecedor</th>
-        <th>CNPJ</th>
-        <th>Nº do lote</th>
-        <th>Descrição do lote</th>
-        <th>Nº do item<!--conforme edital--></th>
-        <th>Código do item<!--conforme lista básica de materiais--></th>
-        <th>Descrição do item<!--conforme lista básica de materiais--></th>
-        <th>Unidade de medida<!--do item--></th>
-        <th>Quantidade<!--do item--></th>
-        <th>Preço unitário<!--do item--></th>
-        <th>Marca<!--do item--></th>
+        <th>Fornecedor [supplierName]</th>
+        <th>CNPJ [supplierCnpj]</th>
+        <th>Nº do lote [lotNumber]</th>
+        <th>Descrição do lote [lotDescription]</th>
+        <th>Nº do item [itemNumber]<!--conforme edital--></th>
+        <th>Código do item [itemCode]<!--conforme lista básica de materiais--></th>
+        <th>Descrição do item [itemDescription]<!--conforme lista básica de materiais--></th>
+        <th>Unidade de medida [itemMeasureUnit]<!--do item--></th>
+        <th>Quantidade [itemQuant]<!--do item--></th>
+        <th>Preço unitário [itemUnitPrice]<!--do item--></th>
+        <th>Marca [itemBrand]<!--do item--></th>
       </tr>
       <tr>
         <!--Campos preenchidos somente como exemplo-->
@@ -76,45 +75,86 @@ via formulário 03.
       </tr>
     </table><br>
     <form>
-      <div class="PRDManager">
-        <label for="PRDManagerName">Gestor de Atas de Registro de Preço</label>
+      <div class="prdManager">
+        <label for="prdManagerName">Gestor de Atas de Registro de Preço</label>
           <input
-            id="PRDManagerName"
+            id="prdManagerName"
             class="form-control"
             required
             type="text"
-            cam-variable-name="PRDManagerName"
+            cam-variable-name="prdManagerName"
             cam-variable-type="String"
             placeholder="Nome completo"
-            ng-minlength="2"
-            ng-maxlength="40"
+            ng-minlength="1"
+            ng-maxlength="60"
           />
-        <label for="PRDManagerCPF">CPF</label>
+        <label for="prdManagerCPF">CPF</label>
             <input
-            id="PRDManagerCPF"
+            id="prdManagerCPF"
             class="form-control"
             required
             type="text"
-            cam-variable-name="PRDManagerCPF"
+            cam-variable-name="prdManagerCPF"
             cam-variable-type="String"
             placeholder="000.000.000-00"
-            ng-minlength="7"
-            ng-maxlength="10"
-          />
+            ng-minlength="14"
+            ng-maxlength="14"
+            />
       </div>
-      <div class="SGPEProcess">
-        <label for="SGPEProcess">Processo SGP-e associado</label>
-          <input
-            id="agencyAcronyms"
-            class="form-control"
-            required
-            type="text"
-            cam-variable-name="agencyAcronyms"
-            cam-variable-type="String"
-            placeholder="Órgão"
-            ng-minlength="2"
-            ng-maxlength="40"
-          />
+      <div class="sgpeProcess">
+        <label for="sgpeProcess">Processo SGP-e associado</label>
+      </div>
+        <select name="select-sgpeProcessAgency">
+          <option value="selecione o orgao desejado" disabled selected>selecione o órgão desejado</option>
+          <option>ARESC</option>
+          <option>BADESC</option>
+          <option>CBMSC</option>
+          <option>CC</option>
+          <option>CGE</option>
+          <option>CIASC</option>
+          <option>CIDASC</option>
+          <option>COHAB</option>
+          <option>DC</option>
+          <option>DEINFRA</option>
+          <option>DETER</option>
+          <option>DETRAN</option>
+          <option>DPE</option>
+          <option>ENA</option>
+          <option>EPAGRI</option>
+          <option>FAPESC</option>
+          <option>FCC</option>
+          <option>FCE</option>
+          <option>FCEE</option>
+          <option>GVG</option>
+          <option>IMA</option>
+          <option>IOESC</option>
+          <option>IPREV</option>
+          <option>JUCESC</option>
+          <option>MPC</option>
+          <option>MPSC</option>
+          <option>PC</option>
+          <option>PGE</option>
+          <option>PMSC</option>
+          <option>SAI</option>
+          <option>SANTUR</option>
+          <option>SAP</option>
+          <option>SAR</option>
+          <option>SCPAR</option>
+          <option>SCPREV</option>
+          <option>SCTUR</option>
+          <option>SDE</option>
+          <option>SDS</option>
+          <option>SEA</option>
+          <option>SEC</option>
+          <option>SED</option>
+          <option>SEF</option>
+          <option>SES</option>
+          <option>SIE</option>
+          <option>SPG</option>
+          <option>SSP</option>
+          <option>TCE</option>
+          <option>UDESC</option>
+        </select>
           <input
             id="processNumber"
             class="form-control"
@@ -123,7 +163,7 @@ via formulário 03.
             cam-variable-name="processNumber"
             cam-variable-type="String"
             placeholder="Nº do processo"
-            ng-minlength="7"
+            ng-minlength="1"
             ng-maxlength="10"
           />
            / <input
@@ -134,7 +174,7 @@ via formulário 03.
             cam-variable-name="year"
             cam-variable-type="String"
             placeholder="Ano"
-            ng-minlength="2"
+            ng-minlength="4"
             ng-maxlength="4"
           />
       </div>   

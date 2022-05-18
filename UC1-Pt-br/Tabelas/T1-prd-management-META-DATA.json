@@ -1,0 +1,193 @@
+{
+  "profile": "tabular-data-package",
+  "resources": [
+    {
+      "name": "T1 PRD Management",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "prdManId",
+            "type": "integer",
+            "format": "default",
+            "title": "ID da ARP",
+            "description": "ID da Ata de Registro de Preços"
+          },
+          {
+            "name": "Agency",
+            "type": "string",
+            "format": "default",
+            "title": "Órgão",
+            "description": "Órgão responsável pelo processo licitatório"
+          },
+          {
+            "name": "bidNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nº do Edital",
+            "description": "Número do edital do pregão"
+          },
+          {
+            "name": "prdNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nº da Ata de Registro de Preços",
+            "description": "Número da Ata de Registro de Preços"
+          },
+          {
+            "name": "supplierName",
+            "type": "string",
+            "format": "default",
+            "title": "Fornecedor",
+            "description": "Nome do fornecedor"
+          },
+          {
+            "name": "supplierCnpj",
+            "type": "string",
+            "format": "default",
+            "title": "CNPJ do Fornecedor",
+            "description": "Número do fornecedor no Cadastro Nacional de Pessoas Jurídicas"
+          },
+          {
+            "name": "lotNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nº do Lote",
+            "description": "Número do lote de compra conforme definido em edital"
+          },
+          {
+            "name": "lotDescription",
+            "type": "string",
+            "format": "default",
+            "title": "Descrição do Lote",
+            "description": "Descrição do lote de compra conforme definido em edital"
+          },
+          {
+            "name": "itemNumber",
+            "type": "integer",
+            "format": "default",
+            "title": "Nº do Item",
+            "description": "Número do item conforme definido em edital"
+          },
+          {
+            "name": "itemCode",
+            "type": "integer",
+            "format": "default",
+            "title": "Código do Item",
+            "description": "Código do item conforme definido no catálogo de materiais básicos"
+          },
+          {
+            "name": "itemDescription",
+            "type": "string",
+            "format": "default",
+            "title": "Descrição do Item",
+            "description": "Descrição do item conforme definido em edital"
+          },
+          {
+            "name": "itemMeasureUnit",
+            "type": "string",
+            "format": "default",
+            "title": "Unidade de Medida",
+            "description": "Unidade de Medida do item"
+          },
+          {
+            "name": "itemQuant",
+            "type": "integer",
+            "format": "default",
+            "title": "Quantidade",
+            "description": "Quantidade definida para compra do item conforme edital"
+          },
+          {
+            "name": "itemUnitPrice",
+            "type": "number",
+            "format": "default",
+            "title": "Preço Unitário",
+            "description": "Preço unitário do item conforme edital adjudicado"
+          },
+          {
+            "name": "itemBrand",
+            "type": "string",
+            "format": "default",
+            "title": "Marca",
+            "description": "Marca do item conforme definido em edital"
+          },
+          {
+            "name": "prdManagerName",
+            "type": "string",
+            "format": "default",
+            "title": "Gestor da Ata de Registro de Preços",
+            "description": "Gestor responsável pela contratação"
+          },
+          {
+            "name": "prdManagerCpf",
+            "type": "string",
+            "format": "default",
+            "title": "CPF do Gestor da ARP",
+            "description": "Número do Cadastro de Pessoa Física do gestor de Atas de Registro de Preços"
+          },
+          {
+            "name": "prdSgpeAgency",
+            "type": "string",
+            "format": "default",
+            "title": "Órgão SGPE ARP",
+            "description": "Sigla do órgão relativo ao processo SGPE aberto para a Ata de Registro de Preços"
+          },
+          {
+            "name": "prdSgpeNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nº SGPE ARP",
+            "description": "Número do processo SGPE aberto para a Ata de Registro de Preços no órgão"
+          },
+          {
+            "name": "prdSgpeYear",
+            "type": "string",
+            "format": "default",
+            "title": "Ano SGPE ARP",
+            "description": "Ano de cadastro do processo SGPE aberto para a Ata de Registro de Preços"
+          },
+          {
+            "name": "supplierRep",
+            "type": "string",
+            "format": "default",
+            "title": "Representante do Fornecedor",
+            "description": "Pessoa responsável pela relação com o Estado nas compras de materiais"
+          },
+          {
+            "name": "supplierRepCpf",
+            "type": "string",
+            "format": "default",
+            "title": "CPF do Representante",
+            "description": "Número do Cadastro de Pessoa Física do representante do fornecedor"
+          },
+          {
+            "name": "numPublicDoe",
+            "type": "integer",
+            "format": "default",
+            "title": "Nº da Publicação no DOE",
+            "description": "Número do Diário Oficial do Estado na qual foi publicada a Ata de Registro de Preços"
+          },
+          {
+            "name": "datePublicDoe",
+            "type": "date",
+            "format": "default",
+            "title": "Data de Publicação no DOE",
+            "description": "Data na qual a Ata de Registro de Preços foi publicada no Diário Oficial do Estado"
+          }
+        ]
+      }
+    }
+  ],
+  "keywords": [
+    "PRD"
+  ],
+  "name": "T1-prd-management",
+  "title": "PRD Management",
+  "description": "Tabela principal de gerenciamento de informações sobre o consumo das Atas de Registro de Preços",
+  "contributors": [
+    {
+      "title": "Smart SC",
+      "role": "author"
+    }
+  ]
+}

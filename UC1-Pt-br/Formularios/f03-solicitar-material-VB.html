@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <link rel="stylesheet" type="text/css" href="smart-sc-style.css" media="screen">
+        <title>Solicitar material de lista básica</title>
+    </head>
+    <body>
+        <h1>Solicitar Material de Lista Básica</h1><br>
+        <text>prezado(a) comprador(a), para fazer sua requisição de material, selecione abaixo os materiais da lista básica
+             e insira a quantidade a ser adquirida de cada item. Caso necessite de mais de um material, clique no botão (+)
+             para incluir novos materiais.</text><br><br>
+        <form>
+            <h3>Descrição do material</h3>;
+                <select id="itemDescription">
+                    <option value="selecione o material" disabled selected>Selecione o material</option>
+                    <option>APONTADOR DE LAPIS DE METAL TIPO COLEGIAL*</option>
+                    <option>BORRACHA DE PAPELARIA PLASTICA</option>
+                    <option>CANETA ESFEROGRAFICA AZUL</option>
+                    <option>CANETA ESFEROGRAFICA PRETA</option>
+                    <option>CANETA ESFEROGRAFICA VERMELHA</option>
+                    <option>CANETA PARA DESTAQUE DE TEXTO, NA COR AMARELA</option>
+                    <option>CANETA PARA DESTAQUE DE TEXTO, NA COR VERDE</option>
+                    <option>CLIPS METALICO PARA PAPEIS NUMERO 0,CX 100 UND*</option>
+                    <option>CLIPS METALICO PARA PAPEIS NUMERO 000000,CX 50 UND*</option>
+                    <option>CLIPS METALICO PARA PAPEIS NUMERO 3/0, CX 50 UND*</option>
+                    <option>COLA PLASTICA BRANCA FRASCO COM 90 GRAMAS</option>
+                    <option>FITA ADESIVA DE PAPEL,PARDA,MED.32MMX50M</option>
+                    <option>FITA ADESIVA TRANSPARENTE 12MMX30M</option>
+                    <option>FITA ADESIVA TRANSPARENTE 50MMX50M</option>
+                    <option>GRAFITE PARA LAPISEIRA COM ESPESSURA 0,5MM E GRADUACAO HB</option>
+                    <option>GRAMPEADOR PARA PAPEIS T. MEDIO PARA GRAMPOS 26/6</option>
+                    <option>GRAMPO PARA GRAMPEADOR T. 26/6, CX 1000 UND</option>
+                    <option>LAPISEIRA PARA GRAFITE COM ESPESSURA 0,5MM</option>
+                    <option>PAPEL OFF-SET NA COR BRANCA FORMATO A4</option>
+                    <option>PEN DRIVE CAPACIDADE DE 16 GB*</option>
+                    <option>PINCEL ATOMICO NA COR AZUL</option>
+                    <option>PINCEL ATOMICO NA COR PRETA</option>
+                    <option>PINCEL ATOMICO NA COR VERDE</option>
+                    <option>PINCEL ATOMICO NA COR VERMELHA</option>
+                    <option>REGUA PLASTICA MEDINDO 30CM</option>
+                </select>
+            Código <input type="text" selected disabled value="Puxar código"><br>
+            Unidade de Medida <input type="text" selected disabled value="Puxar código">
+            Quantidade <input type="Int">;<br><br>
+            <button type="button" onclick="">+</button><text>Solicitar novo material</text><br><br>
+            
+            <h3>Local de entrega do material:</h3>
+            Endereço <input type="text">
+            Complemento <input type="text"> Bairro <input type="text"> Município <input type="text"> UF <input type="text">
+            CEP <input type="text"><br><br>
+
+            <h3>Número de registro da autorização de fornecimento no SIGEF</h3>
+            <input type="text"><br>
+        </form><br>
+    
+        <h3>Atenção:</h3>
+        <text>
+        1) Frete - CIF<BR>
+        2) Para efeitos de pagamento, apresentar Nota Fiscal, CND do Estado de Santa Catarina e do Estado Sede do Fornecedor, CND Municipal, CND da União e FGTS.<br>
+        3) Advertimos que o não cumprimento das obrigações assumidas na fase licitatória e /ou na execução do contrato estará sujeita às sanções previstas.<br>
+        4) São partes integrantes dessa autorização de fornecimento, como se transcritos estivessem, o edital da licitação, anexos, atas de registro de preços supracitados 
+         e quais complementos, documentos, propostas e informações apresentadas pela licitante vencedora e que deram suporte ao julgamento da licitação.
+        </text><br>
+    </body>
+</html>
