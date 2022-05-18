@@ -5,7 +5,7 @@
     <bpmn:task id="N1GerirPlanejamentoDeCompraTask" name="A&#10;Gerir planejamento de compra" />
     <bpmn:task id="N2GerirLicitacaoDeCompraTask" name="B&#10;Gerir licitação de compra" />
     <bpmn:task id="N3GerirAtaDeRegistroDePrecosARPTask" name="C&#10;Gerir Ata de Registro de Preços (ARP)" />
-    <bpmn:task id="N4GerirCompraDeMaterialTask" name="D&#10;Gerir compra de material" />
+    <bpmn:task id="N4GerirCompraDeMaterialTask" name="D&#10;Comprar Material de Lista Básica" />
     <bpmn:task id="N5GerirConsumoDeMaterialTask" name="F&#10;Gerir consumo de material" />
     <bpmn:task id="Activity_03d7mho" name="E&#10;Gerir ocorrências contratuais" />
     <bpmn:group id="Group_1cmbh13" categoryValueRef="CategoryValue_1riva95" />

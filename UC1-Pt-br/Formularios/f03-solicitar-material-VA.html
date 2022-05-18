@@ -1,0 +1,72 @@
+<!-- Essa versão do formulário é para implementação SEM integração com SIGEF. No caso, o registro da AF é
+    feito no SIGEF e para fazer o envio da solicitação de fornecimento será feito via esse formulário.
+-->
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <link rel="stylesheet" type="text/css" href="smart-sc-style.css" media="screen">
+        <title>Solicitar material de lista básica</title>
+    </head>
+    <body>
+        <h1>Solicitar Material de Lista Básica</h1><br>
+        <text>prezado(a) comprador(a), para enviar a requisição de material ao fornecedor, preencha o formulário
+            abaixo com as informações relativas a Autorização de Fornecimento. Caso necessite de mais de um material,
+            clique no botão (+) para incluir novos materiais.</text><br><br>
+        <form>
+            <h3>Número de registro da Autorização de Fornecimento no SIGEF</h3>
+            <input type="text"><br><br>
+            
+            <h3>Informações da solicitação de fornecimento</h3>
+            Código UG Contratante <input type="text">
+            UG Contratante <input type="text">
+            CNPJ UG Contratante<input type="text">
+            Data de Emissão <input type="date"><br>
+            Gestão Contratante <input type="text">
+            Valor total da AF <input type="float">
+            <!-- Prazo de entrega deve ser calculado posteriormente via regra no smart contract-->
+            Prazo de Entrega <input type="int"><br>
+            <!-- O processo SGP-e associado deve ser o processo no qual a ARP do fornecedor está registrada-->
+            Processo SGP-e associado <input type="text">
+            Código no Cadastro de Informações Gerenciais (CIG) <input type="text"><br>
+            <!-- Prazo de pagamento deve ser calculado posteriormente via regra no smart contract-->
+            Prazo de Pagamento <input type="int">
+            Fornecedor favorecido <input type="text">
+            CNPJ Fornecedor favorecido <input type="text">
+            Nº do Edital de Pregão associado <input type="text"><br><br>
+            
+            <h3>Relação de itens requisitados</h3>
+            Código do Item <input type="text">
+            Descrição do material <input type="text">
+            Unidade de Medida <input type="text">
+            Nº da Nota de Empenho  <input type="text">
+            Quantidade  <input type="int">
+            Valor Unitário <input type="float">
+            Valor total <input type="float"><br>
+            <button type="button" onclick="">+</button><text>Registrar novo item</text><br><br>
+            
+            <h3>Local de entrega do material:</h3>
+            Endereço <input type="text">
+            Complemento <input type="text"> Bairro <input type="text"> Município <input type="text"> UF <input type="text">
+            CEP <input type="text"><br><br>
+
+            <h3>Responsáveis</h3>
+            <!-- O Contratante é o prdManagerName, buscar a informação na tabela de gestão de ARPs-->
+            Contratante <input type="text">
+            CPF Contratante <input type="text"><BR>
+            <!-- O representante do fornecedor é o supplierRep, buscar a informação na tabela de gestão de ARPs-->
+            Representante do fornecedor <input type="text">
+            CPF do Representante  <input type="text">
+        </form><br>
+    
+        <h3>Atenção:</h3>
+        <text>
+        1) Frete - CIF<BR>
+        2) Para efeitos de pagamento, apresentar Nota Fiscal, CND do Estado de Santa Catarina e do Estado Sede do Fornecedor, CND Municipal, CND da União e FGTS.<br>
+        3) Advertimos que o não cumprimento das obrigações assumidas na fase licitatória e /ou na execução do contrato estará sujeita às sanções previstas.<br>
+        4) São partes integrantes dessa autorização de fornecimento, como se transcritos estivessem, o edital da licitação, anexos, atas de registro de preços supracitados 
+         e quais complementos, documentos, propostas e informações apresentadas pela licitante vencedora e que deram suporte ao julgamento da licitação.
+        </text><br>
+    </body>
+</html>
