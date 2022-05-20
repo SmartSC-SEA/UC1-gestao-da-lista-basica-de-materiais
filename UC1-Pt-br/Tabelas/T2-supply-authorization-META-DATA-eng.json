@@ -1,0 +1,286 @@
+{
+  "profile": "tabular-data-package",
+  "resources": [
+    {
+      "name": "T2 Supply authorization",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "supAutid",
+            "type": "integer",
+            "format": "default",
+            "title": "ID da AF",
+            "description": "Supply Authorization ID"
+          },
+          {
+            "name": "supAutNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nº da AF",
+            "description": "Supply Authorization Number according to the Fiscal Management System - SIGEF"
+          },
+          {
+            "name": "supAutIssueDate",
+            "type": "date",
+            "format": "default",
+            "title": "Data de Emissão da AF",
+            "description": "Date of issuance of the Supply Authorization in the Tax Management System - SIGEF"
+          },
+          {
+            "name": "supAutManUnitcode",
+            "type": "integer",
+            "format": "default",
+            "title": "UG Contratante",
+            "description": "Code of the management unit responsible for hiring"
+          },
+          {
+            "name": "supAutManUnit",
+            "type": "string",
+            "format": "default",
+            "title": "Nome Contratante",
+            "description": "Name of the management unit responsible for hiring"
+          },
+          {
+            "name": "supAutManTypeCode",
+            "type": "string",
+            "format": "default",
+            "title": "Código Gestão",
+            "description": "Contractor management code responsible for contracting. Describe better what is contract management"
+          },
+          {
+            "name": "supAutManType",
+            "type": "string",
+            "format": "default",
+            "title": "Gestão Contratante",
+            "description": "Name of contracting management responsible for contracting. Describe better what is contract management"
+          },
+          {
+            "name": "supAutTotValue",
+            "type": "number",
+            "format": "default",
+            "title": "Valor Total AF",
+            "description": "Total value of Supply Authorization. It presents the sum of the total values of each of the items contained in the Supply Authorization."
+          },
+          {
+            "name": "supAutDeliveryDeadLine",
+            "type": "integer",
+            "format": "default",
+            "title": "Prazo de Entrega",
+            "description": "Deadline for delivery of the material requested in the Supply Authorization. Information recorded in number of days for delivery from the date of issue of the AF."
+          },
+          {
+            "name": "supAutManUnitCnpj",
+            "type": "string",
+            "format": "default",
+            "title": "CNPJ Contratante",
+            "description": "Number of the contracting management unit in the National Register of Legal Entities."
+          },
+          {
+            "name": "prdSgpeAgency",
+            "type": "string",
+            "format": "default",
+            "title": "Órgão SGPE ARP",
+            "description": "Abbreviation of the body relating to the SGPE process opened for the Price Registration Minutes"
+          },
+          {
+            "name": "prdSgpeNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nº SGPE ARP",
+            "description": "Number of the SGPE process opened for the Price Registration Minute in the body"
+          },
+          {
+            "name": "prdSgpeYear",
+            "type": "string",
+            "format": "default",
+            "title": "Ano SGPE ARP",
+            "description": "Year of registration of the SGPE process opened for the Price Registration Minutes"
+          },
+          {
+            "name": "supAutCigNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nº CIG",
+            "description": "AF number in the Managerial Information Register of the Farm Management System - SIGEF"
+          },
+          {
+            "name": "supAutPaymentDeadLine",
+            "type": "string",
+            "format": "default",
+            "title": "Prazo de Pagamento",
+            "description": "Deadline for payment of Supply Authorization. Information recorded in number of days for payment from the approval of the material delivered"
+          },
+          {
+            "name": "supplierCnpj",
+            "type": "string",
+            "format": "default",
+            "title": "CNPJ do Fornecedor",
+            "description": "Supplier number in the National Register of Legal Entities"
+          },
+          {
+            "name": "supplierName",
+            "type": "string",
+            "format": "default",
+            "title": "Fornecedor",
+            "description": "Supplier name"
+          },
+          {
+            "name": "bidNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nº do Edital",
+            "description": "Bidding number"
+          },
+          {
+            "name": "prdNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nº da Ata de Registro de Preços",
+            "description": "Price Registration documento number"
+          },
+          {
+            "name": "itemCode",
+            "type": "string",
+            "format": "default",
+            "title": "Código do Item",
+            "description": "Item code as defined in the basic materials catalog"
+          },
+          {
+            "name": "itemDescription",
+            "type": "string",
+            "format": "default",
+            "title": "Descrição do Item",
+            "description": "Description of the item as defined in the public notice"
+          },
+          {
+            "name": "itemMeasureUnit",
+            "type": "string",
+            "format": "default",
+            "title": "Unidade de Medida",
+            "description": "Item's Unit of Measure"
+          },
+          {
+            "name": "commitNoteNumber",
+            "type": "string",
+            "format": "default",
+            "title": "Nota de Empenho",
+            "description": "Commitment note number as registered in the Tax Management System - SIGEF"
+          },
+          {
+            "name": "itemQuant",
+            "type": "string",
+            "format": "default",
+            "title": "Quantidade",
+            "description": "Quantity defined for the purchase of the item according to the notice"
+          },
+          {
+            "name": "itemUnitPrice",
+            "type": "string",
+            "format": "default",
+            "title": "Preço Unitário",
+            "description": "Unit price of the item according to the public notice awarded"
+          },
+          {
+            "name": "itemTotValue",
+            "type": "number",
+            "format": "default",
+            "title": "Valor Total Item",
+            "description": "Total value of each item. Shows the multiplication between the unit value of the item [itemUnitPrice] and its quantity [itemQuant]."
+          },
+          {
+            "name": "deliveryAdress",
+            "type": "string",
+            "format": "default",
+            "title": "Endereço - Logradouro",
+            "description": "Address of the delivery place of the material contained in the AF"
+          },
+          {
+            "name": "deliveryAdressComp",
+            "type": "string",
+            "format": "default",
+            "title": "Endereço - Complemento",
+            "description": "Complement of the address of the place of delivery of the material contained in the AF. It can be apartment number, house number, etc."
+          },
+          {
+            "name": "deliveryNeigh",
+            "type": "string",
+            "format": "default",
+            "title": "Endereço - Bairro",
+            "description": "Name of the delivery district of the material contained in the AF"
+          },
+          {
+            "name": "deliveryCity",
+            "type": "string",
+            "format": "default",
+            "title": "Endereço - Cidade",
+            "description": "Name of the city of delivery of the material contained in the AF"
+          },
+          {
+            "name": "deliveryCep",
+            "type": "string",
+            "format": "default",
+            "title": "CEP",
+            "description": "Zip code of the place of delivery of the material contained in the AF"
+          },
+          {
+            "name": "deliveryPhone",
+            "type": "string",
+            "format": "default",
+            "title": "Telefone",
+            "description": "Contact telephone number for the delivery location of the material included in the AF"
+          },
+          {
+            "name": "sendRequestDate",
+            "type": "date",
+            "format": "default",
+            "title": "Data de Requisição",
+            "description": "AF request date from the supplier, data automatically entered when completing the task in the workflow engine"
+          },
+          {
+            "name": "orderDispatchDate",
+            "type": "date",
+            "format": "default",
+            "title": "Data de Despacho",
+            "description": "AF dispatch date by the supplier, data automatically entered at the end of the task in the workflow engine"
+          },
+          {
+            "name": "orderReceptDate",
+            "type": "string",
+            "format": "default",
+            "title": "Data de Recebimento",
+            "description": "Date of receipt of the request by the requester, data automatically inserted at the end of the task in the workflow engine"
+          },
+          {
+            "name": "orderReceptAprov",
+            "type": "boolean",
+            "format": "default",
+            "title": "Aprovação do Pedido",
+            "description": "Approval / disapproval record of the request by the requester, data automatically inserted at the end of the task in the workflow engine. 'True' when material is approved."
+          },
+          {
+            "name": "orderReceptAprovDate",
+            "type": "string",
+            "format": "default",
+            "title": "Data de Aprovação",
+            "description": "Date of approval/disapproval of the order, , data automatically entered at the end of the task in the workflow engine"
+          }
+        ]
+      }
+    }
+  ],
+  "keywords": [
+    "supply authorization",
+    "autorização de fornecimento"
+  ],
+  "name": "T2_supply_authorization_META_DATA",
+  "title": "T2 - Supply Authorization - Meta Data",
+  "description": "Data dictionary containing the fields related to the Supply Authorization Smart Contract",
+  "version": "1.0",
+  "contributors": [
+    {
+      "title": "Smart SC",
+      "role": "author"
+    }
+  ]
+}
