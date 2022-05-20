@@ -181,8 +181,8 @@
   "keywords": [
     "PRD"
   ],
-  "name": "T1-prd-management",
-  "title": "PRD Management",
+  "name": "T1_prd_management_META_DATA",
+  "title": "T1 - PRD Management - Meta Data",
   "description": "Tabela principal de gerenciamento de informações sobre o consumo das Atas de Registro de Preços",
   "contributors": [
     {
