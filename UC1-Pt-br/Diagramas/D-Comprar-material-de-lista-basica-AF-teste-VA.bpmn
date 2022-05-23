@@ -55,7 +55,7 @@
     <bpmn:dataObjectReference id="DataObjectReference_1xkinh2" name="Smart Contract X" dataObjectRef="DataObject_1yui5kq" />
     <bpmn:dataObject id="DataObject_1yui5kq" />
     <bpmn:sequenceFlow id="Flow_060ijh2" sourceRef="Activity_0g69n79" targetRef="Activity_1wfpeoo" />
-    <bpmn:exclusiveGateway id="Gateway_08w6hq5" default="Flow_0k9qow9">
+    <bpmn:exclusiveGateway id="Gateway_08w6hq5">
       <bpmn:incoming>Flow_1q7n3i2</bpmn:incoming>
       <bpmn:outgoing>Flow_0k9qow9</bpmn:outgoing>
       <bpmn:outgoing>Flow_1iotu21</bpmn:outgoing>
@@ -63,21 +63,24 @@
     <bpmn:sequenceFlow id="Flow_1q7n3i2" sourceRef="Activity_1wfpeoo" targetRef="Gateway_08w6hq5" />
     <bpmn:task id="Activity_0lsfkx6" name="Gravar aprovação do pedido">
       <bpmn:incoming>Flow_0k9qow9</bpmn:incoming>
+      <bpmn:outgoing>Flow_10no5q5</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_0k9qow9" sourceRef="Gateway_08w6hq5" targetRef="Activity_0lsfkx6" />
+    <bpmn:sequenceFlow id="Flow_0k9qow9" sourceRef="Gateway_08w6hq5" targetRef="Activity_0lsfkx6">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderReceptAprov=="Aprovado"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:task id="Activity_0ft4obd" name="Enviar aviso ao fornecedor">
       <bpmn:incoming>Flow_1iotu21</bpmn:incoming>
       <bpmn:outgoing>Flow_1j863f7</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="Flow_1iotu21" name="Pedido Reprovado" sourceRef="Gateway_08w6hq5" targetRef="Activity_0ft4obd">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decisaoRevisor=="false"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderReceptAprov=="Reprovado"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:task id="Activity_0zmemk3" name="Gravar reprovação do pedido">
       <bpmn:incoming>Flow_1j863f7</bpmn:incoming>
       <bpmn:outgoing>Flow_07068x1</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="Flow_1j863f7" sourceRef="Activity_0ft4obd" targetRef="Activity_0zmemk3" />
-    <bpmn:endEvent id="Event_0i0phtj" name="Pedido Reprovado">
+    <bpmn:endEvent id="Event_0i0phtj" name="AF Concluída&#10;Reprovado">
       <bpmn:incoming>Flow_07068x1</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_07068x1" sourceRef="Activity_0zmemk3" targetRef="Event_0i0phtj" />
@@ -89,12 +92,30 @@
     <bpmn:dataObject id="DataObject_0d6tzvt" />
     <bpmn:dataObjectReference id="DataObjectReference_1mcm9xe" name="Smart Contract X" dataObjectRef="DataObject_1mn3rhf" />
     <bpmn:dataObject id="DataObject_1mn3rhf" />
-    <bpmn:userTask id="Activity_1wfpeoo" name="Aprovar entrega" camunda:formKey="embedded:deployment:f06-aprovar-entrega-VA.html">
+    <bpmn:userTask id="Activity_1wfpeoo" name="Aprovar entrega" camunda:candidateGroups="comprador">
       <bpmn:incoming>Flow_060ijh2</bpmn:incoming>
       <bpmn:outgoing>Flow_1q7n3i2</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:dataObjectReference id="DataObjectReference_0r1744p" name="F06" dataObjectRef="DataObject_0pb44yw" />
     <bpmn:dataObject id="DataObject_0pb44yw" />
+    <bpmn:sequenceFlow id="Flow_10no5q5" sourceRef="Activity_0lsfkx6" targetRef="Activity_0mm7ilf" />
+    <bpmn:userTask id="Activity_0mm7ilf" name="Confirmar pagamento" camunda:formKey="embedded:deployment:f07-confirmar-pagamento-VA.html" camunda:candidateGroups="comprador">
+      <bpmn:incoming>Flow_10no5q5</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ltn5nk</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="Activity_15g5g8q" name="Gravar pagamento da AF">
+      <bpmn:incoming>Flow_1ltn5nk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1549twb</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1ltn5nk" sourceRef="Activity_0mm7ilf" targetRef="Activity_15g5g8q" />
+    <bpmn:dataObjectReference id="DataObjectReference_0l9hnga" name="Smart Contract X" dataObjectRef="DataObject_12t3isy" />
+    <bpmn:dataObject id="DataObject_12t3isy" />
+    <bpmn:dataObjectReference id="DataObjectReference_0ux3uq6" name="F07" dataObjectRef="DataObject_13yvl05" />
+    <bpmn:dataObject id="DataObject_13yvl05" />
+    <bpmn:endEvent id="Event_0vneinq" name="AF Concluída&#10;Pago">
+      <bpmn:incoming>Flow_1549twb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1549twb" sourceRef="Activity_15g5g8q" targetRef="Event_0vneinq" />
     <bpmn:textAnnotation id="TextAnnotation_15ebi6c">
       <bpmn:text>Verificar na ARP se existe saldo para solicitação
 
@@ -128,12 +149,58 @@ Colocar no e-mail um aviso de recebimento?</bpmn:text>
       <bpmn:text>Enviar aviso ao fornecedor por e-mail</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_14kuhoo" sourceRef="Activity_0ft4obd" targetRef="TextAnnotation_03j5zfx" />
+    <bpmn:textAnnotation id="TextAnnotation_18qam7g">
+      <bpmn:text>Gravar em Smart Contract a data e o status da AF (Aprovado | Reprovado)
+
+Colocar AF na Fila de Pagamento</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_05oautk" sourceRef="Activity_0lsfkx6" targetRef="TextAnnotation_18qam7g" />
+    <bpmn:textAnnotation id="TextAnnotation_0vubibk">
+      <bpmn:text>Gravar em Smart Contract a data do pagamento ao fornecedor e o status do pedido (Pago)
+
+Excluir AF da Fila de Pagamento</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0qq0rhd" sourceRef="Activity_15g5g8q" targetRef="TextAnnotation_0vubibk" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="DComprarMaterialDeListaBasicaProcess">
-      <bpmndi:BPMNShape id="TextAnnotation_03j5zfx_di" bpmnElement="TextAnnotation_03j5zfx">
-        <dc:Bounds x="1940" y="560" width="99.99274099883856" height="53.426248548199766" />
+      <bpmndi:BPMNShape id="TextAnnotation_18qam7g_di" bpmnElement="TextAnnotation_18qam7g">
+        <dc:Bounds x="1940" y="80" width="160" height="95" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0vubibk_di" bpmnElement="TextAnnotation_0vubibk">
+        <dc:Bounds x="2300" y="72" width="159.9883855981417" height="109.17537746806039" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_07068x1_di" bpmnElement="Flow_07068x1">
+        <di:waypoint x="2220" y="460" />
+        <di:waypoint x="2302" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1j863f7_di" bpmnElement="Flow_1j863f7">
+        <di:waypoint x="2040" y="460" />
+        <di:waypoint x="2120" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iotu21_di" bpmnElement="Flow_1iotu21">
+        <di:waypoint x="1840" y="342" />
+        <di:waypoint x="1840" y="460" />
+        <di:waypoint x="1940" y="460" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1863" y="426" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0k9qow9_di" bpmnElement="Flow_0k9qow9">
+        <di:waypoint x="1865" y="317" />
+        <di:waypoint x="1940" y="317" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1899" y="299" width="8" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q7n3i2_di" bpmnElement="Flow_1q7n3i2">
+        <di:waypoint x="1740" y="317" />
+        <di:waypoint x="1815" y="317" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_060ijh2_di" bpmnElement="Flow_060ijh2">
+        <di:waypoint x="1570" y="317" />
+        <di:waypoint x="1640" y="317" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_02giidn_di" bpmnElement="Flow_02giidn">
         <di:waypoint x="1400" y="317" />
         <di:waypoint x="1470" y="317" />
@@ -166,53 +233,19 @@ Colocar no e-mail um aviso de recebimento?</bpmn:text>
         <di:waypoint x="215" y="317" />
         <di:waypoint x="280" y="317" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_060ijh2_di" bpmnElement="Flow_060ijh2">
-        <di:waypoint x="1570" y="317" />
-        <di:waypoint x="1640" y="317" />
+      <bpmndi:BPMNEdge id="Flow_10no5q5_di" bpmnElement="Flow_10no5q5">
+        <di:waypoint x="2040" y="317" />
+        <di:waypoint x="2120" y="317" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1q7n3i2_di" bpmnElement="Flow_1q7n3i2">
-        <di:waypoint x="1740" y="317" />
-        <di:waypoint x="1815" y="317" />
+      <bpmndi:BPMNEdge id="Flow_1ltn5nk_di" bpmnElement="Flow_1ltn5nk">
+        <di:waypoint x="2220" y="317" />
+        <di:waypoint x="2300" y="317" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0k9qow9_di" bpmnElement="Flow_0k9qow9">
-        <di:waypoint x="1865" y="317" />
-        <di:waypoint x="1940" y="317" />
+      <bpmndi:BPMNEdge id="Flow_1549twb_di" bpmnElement="Flow_1549twb">
+        <di:waypoint x="2400" y="317" />
+        <di:waypoint x="2482" y="317" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1iotu21_di" bpmnElement="Flow_1iotu21">
-        <di:waypoint x="1840" y="342" />
-        <di:waypoint x="1840" y="460" />
-        <di:waypoint x="1940" y="460" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1863" y="426" width="54" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1j863f7_di" bpmnElement="Flow_1j863f7">
-        <di:waypoint x="2040" y="460" />
-        <di:waypoint x="2120" y="460" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_07068x1_di" bpmnElement="Flow_07068x1">
-        <di:waypoint x="2220" y="460" />
-        <di:waypoint x="2302" y="460" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="TextAnnotation_15ebi6c_di" bpmnElement="TextAnnotation_15ebi6c">
-        <dc:Bounds x="280" y="80" width="160" height="130" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_165dl58_di" bpmnElement="TextAnnotation_165dl58" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
-        <dc:Bounds x="450" y="80" width="150" height="40" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0tq17wa_di" bpmnElement="TextAnnotation_0tq17wa">
-        <dc:Bounds x="620" y="80" width="160" height="84" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1222tui_di" bpmnElement="TextAnnotation_1222tui">
-        <dc:Bounds x="790" y="80" width="170" height="40" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0qlvw9v_di" bpmnElement="TextAnnotation_0qlvw9v">
-        <dc:Bounds x="1130" y="72" width="150" height="40" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1eu5xj6_di" bpmnElement="TextAnnotation_1eu5xj6">
-        <dc:Bounds x="1470" y="73" width="99.99999794078421" height="53.98110661268555" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="ARPDisponivelParaConsumoStartEvent" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="ARPDisponivelParaConsumoStartEvent" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
         <dc:Bounds x="179" y="299" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="160" y="342" width="75" height="27" />
@@ -278,6 +311,18 @@ Colocar no e-mail um aviso de recebimento?</bpmn:text>
       <bpmndi:BPMNShape id="Activity_0lsfkx6_di" bpmnElement="Activity_0lsfkx6" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
         <dc:Bounds x="1940" y="277" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ft4obd_di" bpmnElement="Activity_0ft4obd">
+        <dc:Bounds x="1940" y="420" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zmemk3_di" bpmnElement="Activity_0zmemk3" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="2120" y="420" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0i0phtj_di" bpmnElement="Event_0i0phtj" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="2302" y="442" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2288" y="485" width="66" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataObjectReference_12m4qhn_di" bpmnElement="DataObjectReference_12m4qhn">
         <dc:Bounds x="1052" y="245" width="36" height="50" />
         <bpmndi:BPMNLabel>
@@ -288,18 +333,6 @@ Colocar no e-mail um aviso de recebimento?</bpmn:text>
         <dc:Bounds x="1392" y="245" width="36" height="50" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1401" y="223" width="19" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ft4obd_di" bpmnElement="Activity_0ft4obd">
-        <dc:Bounds x="1940" y="420" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0zmemk3_di" bpmnElement="Activity_0zmemk3" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
-        <dc:Bounds x="2120" y="420" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0i0phtj_di" bpmnElement="Event_0i0phtj" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
-        <dc:Bounds x="2302" y="442" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2293" y="485" width="54" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataObjectReference_1wv1plm_di" bpmnElement="DataObjectReference_1wv1plm" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
@@ -323,6 +356,51 @@ Colocar no e-mail um aviso de recebimento?</bpmn:text>
           <dc:Bounds x="1741" y="223" width="19" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_15ebi6c_di" bpmnElement="TextAnnotation_15ebi6c">
+        <dc:Bounds x="280" y="80" width="160" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_165dl58_di" bpmnElement="TextAnnotation_165dl58" bioc:stroke="#000000" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="450" y="80" width="150" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0tq17wa_di" bpmnElement="TextAnnotation_0tq17wa">
+        <dc:Bounds x="620" y="80" width="160" height="84" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1222tui_di" bpmnElement="TextAnnotation_1222tui">
+        <dc:Bounds x="790" y="80" width="170" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0qlvw9v_di" bpmnElement="TextAnnotation_0qlvw9v">
+        <dc:Bounds x="1130" y="72" width="150" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1eu5xj6_di" bpmnElement="TextAnnotation_1eu5xj6">
+        <dc:Bounds x="1470" y="73" width="99.99999794078421" height="53.98110661268555" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_03j5zfx_di" bpmnElement="TextAnnotation_03j5zfx">
+        <dc:Bounds x="1940" y="560" width="99.99274099883856" height="53.426248548199766" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qmux7n_di" bpmnElement="Activity_0mm7ilf">
+        <dc:Bounds x="2120" y="277" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15g5g8q_di" bpmnElement="Activity_15g5g8q" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="2300" y="277" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0l9hnga_di" bpmnElement="DataObjectReference_0l9hnga" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="2392" y="245" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2367" y="223" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0ux3uq6_di" bpmnElement="DataObjectReference_0ux3uq6">
+        <dc:Bounds x="2212" y="245" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2222" y="223" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0vneinq_di" bpmnElement="Event_0vneinq" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
+        <dc:Bounds x="2482" y="299" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2467" y="342" width="66" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_0efatp1_di" bpmnElement="Association_0efatp1">
         <di:waypoint x="330" y="277" />
         <di:waypoint x="330" y="210" />
@@ -335,13 +413,13 @@ Colocar no e-mail um aviso de recebimento?</bpmn:text>
         <di:waypoint x="670" y="277" />
         <di:waypoint x="670" y="164" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0trwwwc_di" bpmnElement="Association_0trwwwc">
-        <di:waypoint x="1180" y="277" />
-        <di:waypoint x="1180" y="112" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0ssln5s_di" bpmnElement="Association_0ssln5s">
         <di:waypoint x="840" y="277" />
         <di:waypoint x="840" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0trwwwc_di" bpmnElement="Association_0trwwwc">
+        <di:waypoint x="1180" y="277" />
+        <di:waypoint x="1180" y="112" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_1fzhn43_di" bpmnElement="Association_1fzhn43">
         <di:waypoint x="1520" y="277" />
@@ -350,6 +428,14 @@ Colocar no e-mail um aviso de recebimento?</bpmn:text>
       <bpmndi:BPMNEdge id="Association_14kuhoo_di" bpmnElement="Association_14kuhoo">
         <di:waypoint x="1990" y="500" />
         <di:waypoint x="1990" y="560" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_05oautk_di" bpmnElement="Association_05oautk">
+        <di:waypoint x="1990" y="277" />
+        <di:waypoint x="1990" y="175" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0qq0rhd_di" bpmnElement="Association_0qq0rhd">
+        <di:waypoint x="2350" y="277" />
+        <di:waypoint x="2350" y="181" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
