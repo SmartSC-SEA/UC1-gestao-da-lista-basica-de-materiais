@@ -5,7 +5,7 @@
   */
 
 CREATE TABLE T2_supply_authorization (
-  -- Supply authorization (PRD) informaction section.  
+  -- Supply authorization (SA) informaction section.  
   prdManId               VARCHAR NOT NULL PRIMARY KEY
   ,supAutNumber           VARCHAR(12) NOT NULL
   ,supAutIssueDate        VARCHAR(9) NOT NULL
@@ -54,8 +54,12 @@ CREATE TABLE T2_supply_authorization (
   ,sendRequestDate          VARCHAR(10)
   ,orderDispatchDate        TIMESTAMP
   ,orderReceptDate          TIMESTAMP
-  ,orderReceptAprov         BOOLEAN
+  ,orderReceptAprov         INTEGER
   ,orderReceptAprovDate     TIMESTAMP
+  
+  -- novos campos incluídos na versão do diagrama no qual existe a tarefa/form de confirmação de pagamento.
+  ,orderReceptPayDate       TIMESTAMP
+  ,orderReceptPayNote       VARCHAR(20)
   /*
   (*) Verificar como faremos para registrar as situações nas quais a aprovação é parcial,
   sendo, em geral, por diferença de quantidade. No caso, teríamos que permitir a alteração

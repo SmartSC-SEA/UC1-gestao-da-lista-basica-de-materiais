@@ -265,6 +265,20 @@
             "title": "Data de Aprovação",
             "description": "Date of approval/disapproval of the order, , data automatically entered at the end of the task in the workflow engine"
           }
+          {
+            "name": "orderReceptPayDate",
+            "type": "string",
+            "format": "default",
+            "title": "Data de Pagamento",
+            "description": "Order payment date"
+          }
+          {
+            "name": "orderReceptPayNote",
+            "type": "string",
+            "format": "default",
+            "title": "Nº da Nota de Pagamento",
+            "description": "AF payment note number"
+          }
         ]
       }
     }

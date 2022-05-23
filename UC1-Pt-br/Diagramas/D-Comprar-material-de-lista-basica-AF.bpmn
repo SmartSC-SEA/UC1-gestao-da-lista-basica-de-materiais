@@ -413,10 +413,10 @@ Excluir AF da Fila de Pagamento</bpmn:text>
         <dc:Bounds x="2080" y="579" width="172" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_02wx00p_di" bpmnElement="TextAnnotation_02wx00p">
-        <dc:Bounds x="2000" y="93" width="190" height="97" />
+        <dc:Bounds x="2000" y="93" width="189.98819163292848" height="96.99730094466938" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_090rdti_di" bpmnElement="TextAnnotation_090rdti">
-        <dc:Bounds x="2320" y="93" width="169.99785378960036" height="108.43373493975903" />
+        <dc:Bounds x="2320" y="93" width="169.99831309041835" height="107.98329959514169" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0grj2ci_di" bpmnElement="MaterialReprovadoBoundaryEvent" bioc:stroke="#000" bioc:fill="#fff">
         <dc:Bounds x="1822" y="332" width="36" height="36" />

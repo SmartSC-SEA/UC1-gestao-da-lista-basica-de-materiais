@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "components": [
+    {
+      "text": "## Aprovação do Pedido\n\nPara fins de processamento de pagamento ao fornecedor, relativo à AF [supAutNumber], vinculada à ARP [prdNumber], aprovamos o material recebido conforme abaixo:\n\n## Material aprovado:\n- Clicar em \"Aprovar Material\" aprova 100% do material despachado, registra, avisa ao fornecedor, fecha a solicitação e coloca na fila de pagamento;\n- Clicar em \"Reprovar Material\" reprova o pedido, registra, avisa ao fornecedor e fecha a solicitação;\n- Clicar em \"Aprovar Parcialmente\" aber os campos de quantidade e marca no formulário para que o comprador altere os valores, registra a alteração, avisa ao fornecedor, fecha a solicitação e coloca na fila de pagamento.",
+      "type": "text",
+      "id": "Field_1xjax2n"
+    },
+    {
+      "action": "submit",
+      "key": "field_1",
+      "label": "Aprovar Material",
+      "type": "button",
+      "id": "Field_1azv51n"
+    },
+    {
+      "action": "submit",
+      "key": "field_0",
+      "label": "Reprovar Material",
+      "type": "button",
+      "id": "Field_0epbcuh"
+    },
+    {
+      "action": "submit",
+      "key": "field_1",
+      "label": "Aprovar Parcialmente",
+      "type": "button",
+      "id": "Field_0wmrcg4"
+    }
+  ],
+  "type": "default",
+  "id": "Form_07lzk2g"
+}
