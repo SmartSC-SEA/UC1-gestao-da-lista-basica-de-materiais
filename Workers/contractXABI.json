@@ -1,0 +1,126 @@
+{
+    "contractName": "SmartSC",
+    "abi":[
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "orderReceptDate_",
+                    "type": "string"
+                }
+            ],
+            "name": "deliveryApproval",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "orderDispatchDate_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "orderDispatchForm_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "orderDispatchNumber_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "invoiceNumber_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "invoiceUrl_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "deliveryAdress_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "deliveryAdressComp_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "deliveryNeigh_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "deliveryCity_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "deliveryState_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "deliveryCep_",
+                    "type": "string"
+                }
+            ],
+            "name": "order",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "orderReceptAprov_",
+                    "type": "string"
+                }
+            ],
+            "name": "receiptApproval",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "orderReceptPayDate_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "orderReceptPayNote_",
+                    "type": "string"
+                }
+            ],
+            "name": "receiptDate",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "disapprove",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ]
+
+  }
