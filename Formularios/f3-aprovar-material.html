@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Aprovar entrega de pedido</title>
+    </head>
+    <body>
+        <h1>Aprovação do Pedido</h1><br>
+        <text>Para fins de processamento de pagamento ao fornecedor, relativo à AF [supAutNumber],
+            vinculada à ARP [prdNumber], aprovamos o material recebido conforme abaixo:<br><br>
+            
+            <h3>Material aprovado:</h3>
+
+            - Clicar em "Aprovar Material" aprova 100% do material despachado, registra, avisa ao fornecedor, fecha
+            a solicitação e coloca na fila de pagamento.<br>
+            - Clicar em "Reprovar Material" reprova o pedido, registra, avisa ao fornecedor e fecha a solicitação.<br>
+            - Clicar em "Aprovar Parcialmente" abre os campos de quantidade e marca no formulário para que o comprador
+            altere os valores, registra a alteração, avisa ao fornecedor, fecha a solicitação e coloca na fila de pagamento.
+        </text><br><br>
+        <form>
+            <select id="orderReceptAprov" name="orderReceptAprov" class="form-control" cam-variable-name="orderReceptAprov" cam-variable-type="String">
+                <option value=" ">-- Selecione a opção --</option>
+                <option value="Aprovado">Aprovar material</option>
+                <option value="Aprovado">aprovar parcialmente</option>
+                <option value="Reprovado">Reprovar material</option>
+            </select>
+        </form>
+        <text>
+            <h3>Relação de material entregue:</h3>
+            Código do Item <input id="itemCode" name="itemCode" class="form-control" cam-variable-name="itemCode" cam-variable-type="String">
+            Descrição do material <input id="itemDescription" name="itemDescription" class="form-control" cam-variable-name="itemDescription" cam-variable-type="String">
+            Unidade de Medida <input id="itemMeasureUnit" name="itemMeasureUnit" class="form-control" cam-variable-name="itemMeasureUnit" cam-variable-type="String">
+            Nº da Nota de Empenho <input id="commitNoteNumber" name="commitNoteNumber" class="form-control" cam-variable-name="commitNoteNumber" cam-variable-type="String">
+            Quantidade <input id="itemQuant" name="itemQuant" class="form-control" cam-variable-name="itemQuant" cam-variable-type="String">
+            Valor Unitário <input id="itemUnitPrice" name="itemUnitPrice" class="form-control" cam-variable-name="itemUnitPrice" cam-variable-type="String">
+            Valor total <input id="itemTotValue" name="itemTotValue" class="form-control" cam-variable-name="itemTotValue" cam-variable-type="String"><br>
+
+        </text>
+    </body>
+</html>

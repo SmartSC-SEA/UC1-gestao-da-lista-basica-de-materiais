@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Registrar despacho de pedido</title>
+    </head>
+    <body>
+        <h1>Registrar despacho do pedido de material</h1><br>
+        <text>prezado(a) cliente(a), para fins de acompanhamento, registramos o despacho do material
+            solicitado na AF [supAutNumber], vinculada à Ata de Registro de Preços nº [prdNumber],
+            conforme abaixo:
+        <form>
+            Data de Despacho <input id="orderDispatchDate" name="orderDispatchDate" class="form-control" cam-variable-name="orderDispatchDate" cam-variable-type="String">
+            Forma de despacho <input id="orderDispatchForm" name="orderDispatchForm" class="form-control" cam-variable-name="orderDispatchForm" cam-variable-type="String"><br>
+            Nº de protocolo (em caso de Correios) <input id="orderDispatchNumber" name="orderDispatchNumber" class="form-control" cam-variable-name="orderDispatchNumber" cam-variable-type="String">
+            Nº da Nota Fiscal <input id="invoiceNumber" name="invoiceNumber" class="form-control" cam-variable-name="invoiceNumber" cam-variable-type="String"><br>
+            Link da Nota Fiscal (em caso de nota fiscal eletrônica) <input id="invoiceUrl" name="invoiceUrl" class="form-control" cam-variable-name="invoiceUrl" cam-variable-type="String"><br><br><br>
+
+            <h3>Local de entrega do material</h3>
+            Endereço <input id="deliveryAdress" name="deliveryAdress" class="form-control" cam-variable-name="deliveryAdress" cam-variable-type="String">
+            Complemento <input id="deliveryAdressComp" name="deliveryAdressComp" class="form-control" cam-variable-name="deliveryAdressComp" cam-variable-type="String">
+             Bairro <input id="deliveryNeigh" name="deliveryNeigh" class="form-control" cam-variable-name="deliveryNeigh" cam-variable-type="String">
+             Município <input id="deliveryCity" name="deliveryCity" class="form-control" cam-variable-name="deliveryCity" cam-variable-type="String">
+             UF <input id="deliveryState" name="deliveryState" class="form-control" cam-variable-name="deliveryState" cam-variable-type="String">
+            CEP <input id="deliveryCep" name="deliveryCep" class="form-control" cam-variable-name="deliveryCep" cam-variable-type="String"><br><br>
+        </form>
+    </body>
+</html>

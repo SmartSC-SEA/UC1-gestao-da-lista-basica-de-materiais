@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Solicitar material de lista básica</title>
+    </head>
+    <body>
+        <h1>Solicitar Material de Lista Básica</h1><br>
+        <text>prezado(a) comprador(a), para enviar a requisição de material ao fornecedor, preencha o formulário
+            abaixo com as informações relativas a Autorização de Fornecimento. Caso necessite de mais de um material,
+            clique no botão (+) para incluir novos materiais.</text><br><br>
+        <form>
+            <h3>Número de registro da Autorização de Fornecimento no SIGEF</h3>
+            <input id="supAutId" name="supAutId" class="form-control" cam-variable-name="supAutId" cam-variable-type="String"><br><br>
+            
+            <h3>Informações da solicitação de fornecimento</h3>
+            Código UG Contratante <input id="supAutManUnitCode" name="supAutManUnitCode" class="form-control" cam-variable-name="supAutManUnitCode" cam-variable-type="String">
+            UG Contratante <input id="supAutManUnit" name="supAutManUnit" class="form-control" cam-variable-name="supAutManUnit" cam-variable-type="String">
+            CNPJ UG Contratante<input id="supAutManUnitCnpj" name="supAutManUnitCnpj" class="form-control" cam-variable-name="supAutManUnitCnpj" cam-variable-type="String">
+            Data de Emissão <input id="supAutIssueDate" name="supAutIssueDate" class="form-control" cam-variable-name="supAutIssueDate" cam-variable-type="String"><br>
+            Gestão Contratante <input id="supAutManTypeCode" name="supAutManTypeCode" class="form-control" cam-variable-name="supAutManTypeCode" cam-variable-type="String">
+            Valor total da AF <input id="supAutTotValue" name="supAutTotValue" class="form-control" cam-variable-name="supAutTotValue" cam-variable-type="String">
+            Prazo de Entrega <input id="supAutDeliveryDeadLine" name="supAutDeliveryDeadLine" class="form-control" cam-variable-name="supAutDeliveryDeadLine" cam-variable-type="String"><br>
+            Processo SGP-e associado <input id="prdSgpeNumber" name="prdSgpeNumber" class="form-control" cam-variable-name="prdSgpeNumber" cam-variable-type="String">
+            Código no Cadastro de Informações Gerenciais (CIG) <input id="supAutCigNumber" name="supAutCigNumber" class="form-control" cam-variable-name="supAutCigNumber" cam-variable-type="String"><br>
+            Prazo de Pagamento <input id="supAutPaymentDeadLine" name="supAutPaymentDeadLine" class="form-control" cam-variable-name="supAutPaymentDeadLine" cam-variable-type="String">
+            Fornecedor favorecido <input id="supplierName" name="supplierName" class="form-control" cam-variable-name="supplierName" cam-variable-type="String">
+            CNPJ Fornecedor favorecido <input id="supplierCnpj" name="supplierCnpj" class="form-control" cam-variable-name="supplierCnpj" cam-variable-type="String">
+            Nº do Edital de Pregão associado <input id="bidNumber" name="bidNumber" class="form-control" cam-variable-name="bidNumber" cam-variable-type="String"><br><br>
+            
+            <h3>Relação de itens requisitados</h3>
+            Código do Item <input id="itemCode" name="itemCode" class="form-control" cam-variable-name="itemCode" cam-variable-type="String">
+            Descrição do material <input id="itemDescription" name="itemDescription" class="form-control" cam-variable-name="itemDescription" cam-variable-type="String">
+            Unidade de Medida <input id="itemMeasureUnit" name="itemMeasureUnit" class="form-control" cam-variable-name="itemMeasureUnit" cam-variable-type="String">
+            Nº da Nota de Empenho <input id="commitNoteNumber" name="commitNoteNumber" class="form-control" cam-variable-name="commitNoteNumber" cam-variable-type="String">
+            Quantidade <input id="itemQuant" name="itemQuant" class="form-control" cam-variable-name="itemQuant" cam-variable-type="String">
+            Valor Unitário <input id="itemUnitPrice" name="itemUnitPrice" class="form-control" cam-variable-name="itemUnitPrice" cam-variable-type="String">
+            Valor total <input id="itemTotValue" name="itemTotValue" class="form-control" cam-variable-name="itemTotValue" cam-variable-type="String"><br>
+                        
+            <h3>Local de entrega do material:</h3>
+            Endereço <input id="deliveryAdress" name="deliveryAdress" class="form-control" cam-variable-name="deliveryAdress" cam-variable-type="String">
+            Complemento <input id="deliveryAdressComp" name="deliveryAdressComp" class="form-control" cam-variable-name="deliveryAdressComp" cam-variable-type="String">
+             Bairro <input id="deliveryNeigh" name="deliveryNeigh" class="form-control" cam-variable-name="deliveryNeigh" cam-variable-type="String">
+             Município <input id="deliveryCity" name="deliveryCity" class="form-control" cam-variable-name="deliveryCity" cam-variable-type="String">
+             UF <input id="deliveryState" name="deliveryState" class="form-control" cam-variable-name="deliveryState" cam-variable-type="String">
+            CEP <input id="deliveryCep" name="deliveryCep" class="form-control" cam-variable-name="deliveryCep" cam-variable-type="String"><br><br>
+
+            <h3>Responsáveis</h3>
+            Contratante <input id="prdManagerName" name="prdManagerName" class="form-control" cam-variable-name="prdManagerName" cam-variable-type="String">
+            CPF Contratante <input id="prdManagerCpf" name="prdManagerCpf" class="form-control" cam-variable-name="prdManagerCpf" cam-variable-type="String"><BR>
+            Representante do fornecedor <input id="supplierRep" name="supplierRep" class="form-control" cam-variable-name="supplierRep" cam-variable-type="String">
+            CPF do Representante  <input id="supplierRepCpf" name="supplierRepCpf" class="form-control" cam-variable-name="supplierRepCpf" cam-variable-type="String">
+        </form><br>
+    </body>
+</html>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0vrlv41" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0-nightly.20210829" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:collaboration id="Collaboration_0vmmkzm">
+    <bpmn:participant id="ComprarMaterialDeListaBasicaParticipant" name="Comprar material de lista básica" processRef="Process_1q0mb6g" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1q0mb6g" name="Requisitar material de lista básica" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_12ttaa0">
+      <bpmn:lane id="CompradorGovernoLane" name="Comprador&#10;(Governo)">
+        <bpmn:flowNodeRef>RequisitarMaterialDeListaBasicaStartEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_1y5epb6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ReceberMaterialDespachadoTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>AprovarMaterialRecebidoTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ConfirmarPagamentoDoPedidoTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EnviarSolicitacaoAoFornecedorTask</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="RedeBlockchainLane" name="Rede Blockchain">
+        <bpmn:flowNodeRef>GravarSolicitacaoTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EncerrarSolicitacaoEndEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EncerrarSolicitacaoEndEvent1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GravarDadosDoDespachoTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GravarAprovacaoDoPedidoTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GravarReprovacaoDoPedidoTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GravarPagamentoTask</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="FornecedorLane" name="Fornecedor">
+        <bpmn:flowNodeRef>RegistrarDespachoDoMaterialTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>PrepararPedidoEDespacharTask</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="RequisitarMaterialDeListaBasicaStartEvent" name="Requisitar material de lista básica" camunda:formKey="embedded:deployment:f0-solicitar-material.html" camunda:initiator="comprador">
+      <bpmn:outgoing>Flow_1a4g4ac</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="GravarSolicitacaoTask" name="Gravar solicitação">
+      <bpmn:incoming>Flow_19om9pj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gy9xke</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_1y5epb6">
+      <bpmn:incoming>Flow_016sep9</bpmn:incoming>
+      <bpmn:outgoing>Flow_114mu1w</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0xsmmld</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EncerrarSolicitacaoEndEvent" name="Encerrar solicitação">
+      <bpmn:incoming>Flow_0cw6zmf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EncerrarSolicitacaoEndEvent1" name="Encerrar Solicitação">
+      <bpmn:incoming>Flow_1pcjgy3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1a4g4ac" sourceRef="RequisitarMaterialDeListaBasicaStartEvent" targetRef="EnviarSolicitacaoAoFornecedorTask" />
+    <bpmn:sequenceFlow id="Flow_19om9pj" sourceRef="EnviarSolicitacaoAoFornecedorTask" targetRef="GravarSolicitacaoTask" />
+    <bpmn:sequenceFlow id="Flow_0gy9xke" sourceRef="GravarSolicitacaoTask" targetRef="PrepararPedidoEDespacharTask" />
+    <bpmn:sequenceFlow id="Flow_1wssf5v" sourceRef="PrepararPedidoEDespacharTask" targetRef="RegistrarDespachoDoMaterialTask" />
+    <bpmn:sequenceFlow id="Flow_0ydlm05" sourceRef="RegistrarDespachoDoMaterialTask" targetRef="GravarDadosDoDespachoTask" />
+    <bpmn:sequenceFlow id="Flow_12nt4mn" sourceRef="GravarDadosDoDespachoTask" targetRef="ReceberMaterialDespachadoTask" />
+    <bpmn:sequenceFlow id="Flow_114mu1w" sourceRef="Gateway_1y5epb6" targetRef="GravarReprovacaoDoPedidoTask">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderReceptAprov=="Reprovado"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0cw6zmf" sourceRef="GravarReprovacaoDoPedidoTask" targetRef="EncerrarSolicitacaoEndEvent" />
+    <bpmn:sequenceFlow id="Flow_0xsmmld" sourceRef="Gateway_1y5epb6" targetRef="GravarAprovacaoDoPedidoTask">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderReceptAprov=="Aprovado"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_136knj0" sourceRef="GravarAprovacaoDoPedidoTask" targetRef="ConfirmarPagamentoDoPedidoTask" />
+    <bpmn:sequenceFlow id="Flow_1pcjgy3" sourceRef="GravarPagamentoTask" targetRef="EncerrarSolicitacaoEndEvent1" />
+    <bpmn:userTask id="RegistrarDespachoDoMaterialTask" name="Registrar despacho do material" camunda:formKey="embedded:deployment:f1-registrar-despacho.html">
+      <bpmn:incoming>Flow_1wssf5v</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ydlm05</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:manualTask id="PrepararPedidoEDespacharTask" name="Preparar pedido e despachar">
+      <bpmn:incoming>Flow_0gy9xke</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wssf5v</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:sequenceFlow id="Flow_0y5wbt9" sourceRef="ReceberMaterialDespachadoTask" targetRef="AprovarMaterialRecebidoTask" />
+    <bpmn:userTask id="ReceberMaterialDespachadoTask" name="Receber material despachado" camunda:formKey="embedded:deployment:f2-receber-material.html">
+      <bpmn:incoming>Flow_12nt4mn</bpmn:incoming>
+      <bpmn:outgoing>Flow_0y5wbt9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_016sep9" sourceRef="AprovarMaterialRecebidoTask" targetRef="Gateway_1y5epb6" />
+    <bpmn:userTask id="AprovarMaterialRecebidoTask" name="Aprovar material recebido" camunda:formKey="embedded:deployment:f3-aprovar-material.html">
+      <bpmn:incoming>Flow_0y5wbt9</bpmn:incoming>
+      <bpmn:outgoing>Flow_016sep9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1o2t0r5" sourceRef="ConfirmarPagamentoDoPedidoTask" targetRef="GravarPagamentoTask" />
+    <bpmn:userTask id="ConfirmarPagamentoDoPedidoTask" name="Confirmar pagamento do pedido" camunda:formKey="embedded:deployment:f4-confirmar-pagamento.html">
+      <bpmn:incoming>Flow_136knj0</bpmn:incoming>
+      <bpmn:outgoing>Flow_1o2t0r5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="EnviarSolicitacaoAoFornecedorTask" name="Enviar solicitação ao fornecedor" camunda:type="external" camunda:topic="EnviarSolicitacaoAoFornecedorTask">
+      <bpmn:incoming>Flow_1a4g4ac</bpmn:incoming>
+      <bpmn:outgoing>Flow_19om9pj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="GravarDadosDoDespachoTask" name="Gravar dados do despacho" camunda:type="external" camunda:topic="DespachoDoPedido">
+      <bpmn:incoming>Flow_0ydlm05</bpmn:incoming>
+      <bpmn:outgoing>Flow_12nt4mn</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="GravarAprovacaoDoPedidoTask" name="Gravar aprovação do pedido" camunda:type="external" camunda:topic="GravarAprovacaoDoPedido">
+      <bpmn:incoming>Flow_0xsmmld</bpmn:incoming>
+      <bpmn:outgoing>Flow_136knj0</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="GravarReprovacaoDoPedidoTask" name="Gravar reprovação do pedido" camunda:type="external" camunda:topic="GravarReprovaçãoDoPedido">
+      <bpmn:incoming>Flow_114mu1w</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cw6zmf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="GravarPagamentoTask" name="Gravar pagamento" camunda:type="external" camunda:topic="GravarPagamentoDaAF">
+      <bpmn:incoming>Flow_1o2t0r5</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pcjgy3</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0vmmkzm">
+      <bpmndi:BPMNShape id="Participant_070906k_di" bpmnElement="ComprarMaterialDeListaBasicaParticipant" isHorizontal="true">
+        <dc:Bounds x="160" y="50" width="1300" height="550" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_00um0lx_di" bpmnElement="FornecedorLane" isHorizontal="true">
+        <dc:Bounds x="190" y="470" width="1270" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0kj9fke_di" bpmnElement="RedeBlockchainLane" isHorizontal="true">
+        <dc:Bounds x="190" y="333" width="1270" height="137" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_128zr85_di" bpmnElement="CompradorGovernoLane" isHorizontal="true">
+        <dc:Bounds x="190" y="50" width="1270" height="283" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1o2t0r5_di" bpmnElement="Flow_1o2t0r5">
+        <di:waypoint x="1290" y="160" />
+        <di:waypoint x="1290" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_016sep9_di" bpmnElement="Flow_016sep9">
+        <di:waypoint x="870" y="120" />
+        <di:waypoint x="935" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0y5wbt9_di" bpmnElement="Flow_0y5wbt9">
+        <di:waypoint x="730" y="120" />
+        <di:waypoint x="770" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pcjgy3_di" bpmnElement="Flow_1pcjgy3">
+        <di:waypoint x="1340" y="400" />
+        <di:waypoint x="1392" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_136knj0_di" bpmnElement="Flow_136knj0">
+        <di:waypoint x="1190" y="360" />
+        <di:waypoint x="1190" y="120" />
+        <di:waypoint x="1240" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xsmmld_di" bpmnElement="Flow_0xsmmld">
+        <di:waypoint x="985" y="120" />
+        <di:waypoint x="1170" y="120" />
+        <di:waypoint x="1170" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cw6zmf_di" bpmnElement="Flow_0cw6zmf">
+        <di:waypoint x="1010" y="400" />
+        <di:waypoint x="1062" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_114mu1w_di" bpmnElement="Flow_114mu1w">
+        <di:waypoint x="960" y="145" />
+        <di:waypoint x="960" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12nt4mn_di" bpmnElement="Flow_12nt4mn">
+        <di:waypoint x="530" y="360" />
+        <di:waypoint x="530" y="120" />
+        <di:waypoint x="630" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ydlm05_di" bpmnElement="Flow_0ydlm05">
+        <di:waypoint x="530" y="500" />
+        <di:waypoint x="530" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wssf5v_di" bpmnElement="Flow_1wssf5v">
+        <di:waypoint x="430" y="540" />
+        <di:waypoint x="480" y="540" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gy9xke_di" bpmnElement="Flow_0gy9xke">
+        <di:waypoint x="380" y="440" />
+        <di:waypoint x="380" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19om9pj_di" bpmnElement="Flow_19om9pj">
+        <di:waypoint x="380" y="160" />
+        <di:waypoint x="380" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a4g4ac_di" bpmnElement="Flow_1a4g4ac">
+        <di:waypoint x="278" y="120" />
+        <di:waypoint x="330" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1p96k6s_di" bpmnElement="RequisitarMaterialDeListaBasicaStartEvent" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="242" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="222" y="145" width="78" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0oj8jpb_di" bpmnElement="GravarSolicitacaoTask" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="330" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1y5epb6_di" bpmnElement="Gateway_1y5epb6" isMarkerVisible="true">
+        <dc:Bounds x="935" y="95" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_089m5xn_di" bpmnElement="EncerrarSolicitacaoEndEvent" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="1062" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1054" y="425" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0inxdi4_di" bpmnElement="EncerrarSolicitacaoEndEvent1" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
+        <dc:Bounds x="1392" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1383" y="425" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_156j1pz_di" bpmnElement="RegistrarDespachoDoMaterialTask">
+        <dc:Bounds x="480" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18wdt2x_di" bpmnElement="PrepararPedidoEDespacharTask">
+        <dc:Bounds x="330" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0wbn1ga_di" bpmnElement="ReceberMaterialDespachadoTask">
+        <dc:Bounds x="630" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_11yhwcg_di" bpmnElement="AprovarMaterialRecebidoTask">
+        <dc:Bounds x="770" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12mn0wu_di" bpmnElement="ConfirmarPagamentoDoPedidoTask">
+        <dc:Bounds x="1240" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_024ax37_di" bpmnElement="EnviarSolicitacaoAoFornecedorTask">
+        <dc:Bounds x="330" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xna6q6_di" bpmnElement="GravarDadosDoDespachoTask">
+        <dc:Bounds x="480" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12nljah_di" bpmnElement="GravarAprovacaoDoPedidoTask">
+        <dc:Bounds x="1120" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nnl3xv_di" bpmnElement="GravarReprovacaoDoPedidoTask">
+        <dc:Bounds x="910" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_057wxg8_di" bpmnElement="GravarPagamentoTask">
+        <dc:Bounds x="1240" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
